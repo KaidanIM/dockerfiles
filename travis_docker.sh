@@ -15,7 +15,7 @@ push() {
 
 	for image in *; do
 		if [ -f $image/Dockerfile ]; then
-			docker docker push "kaidan/${image}:latest"
+			docker push "kaidan/${image}:latest"
 		fi
 	done
 }
