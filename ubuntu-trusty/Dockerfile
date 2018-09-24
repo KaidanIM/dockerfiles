@@ -9,6 +9,7 @@ RUN sudo apt-get update && \
     sudo apt-get install -y -t trusty-backports \
                          wget \
                          cmake \
+                         ccache \
                          build-essential \
                          ninja-build \
                          zlib1g-dev \

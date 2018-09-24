@@ -5,4 +5,5 @@ RUN apt update && \
         ninja-build \
         curl \
         extra-cmake-modules \
-        kirigami2-dev:armhf
+        kirigami2-dev:armhf \
+        ccache

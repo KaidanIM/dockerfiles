@@ -13,4 +13,5 @@ RUN apt update && \
         qtquickcontrols2-5-dev \
         libgloox-dev \
         qtdeclarative5-dev \
-        libqt5svg5-dev
+        libqt5svg5-dev \
+        ccache
