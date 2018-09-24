@@ -1,0 +1,11 @@
+services:
+- docker
+dist: xenial
+
+script: bash travis_docker.sh build
+
+deploy:
+  provider: script
+  script: bash travis_docker.sh push
+  on:
+    branch: master
