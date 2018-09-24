@@ -30,3 +30,9 @@ RUN wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/downlo
     sudo dpkg -i libgloox*.deb || sudo apt-get -f -y install && \
     rm libgloox*.deb
 
+ENV QT_BASE_DIR=/opt/qt510
+ENV QTDIR=$QT_BASE_DIR
+ENV PATH=$QT_BASE_DIR/bin:$PATH
+
+ENV LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
+ENV PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
