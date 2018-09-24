@@ -20,7 +20,9 @@ RUN sudo apt-get update && \
                          qt510x11extras \
                          qt510svg \
                          qt510quickcontrols2 \
-                         mesa-common-dev
+                         mesa-common-dev \
+                         libgl1-mesa-dev \
+                         libssl-dev
 
 RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.50/kf5-5.50.0-Release-ubuntu-trusty-amd64.tar.xz" && \
     mkdir /tmp/kf5 && \

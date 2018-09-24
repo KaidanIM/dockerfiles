@@ -14,4 +14,7 @@ RUN apt update && \
         libgloox-dev \
         qtdeclarative5-dev \
         libqt5svg5-dev \
-        ccache
+        ccache \
+        mesa-common-dev \
+        libgl1-mesa-dev \
+        libssl-dev
