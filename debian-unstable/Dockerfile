@@ -2,6 +2,7 @@ FROM debian:unstable
 
 RUN apt update && \
     apt install -y \
+        ninja-build \
         kirigami2-dev \
         build-essential \
         extra-cmake-modules \
