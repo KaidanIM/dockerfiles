@@ -17,4 +17,5 @@ RUN apt update && \
         ccache \
         mesa-common-dev \
         libgl1-mesa-dev \
-        libssl-dev
+        libssl-dev \
+        appstream
