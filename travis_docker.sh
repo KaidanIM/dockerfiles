@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
 
 build() {
-	for image in *; do
-		if [ -f $image/Dockerfile ]; then
-			cd $image
-			docker build -t "kaidan/${image}:latest" .
-			cd ..
-		fi
-	done
+	if [ -f $IMAGE/Dockerfile ]; then
+		cd $IMAGE
+		docker build -t "kaidan/${IMAGE}:latest" .
+		cd ..
+	fi
 }
 
 push() {
 	echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-	for image in *; do
-		if [ -f $image/Dockerfile ]; then
-			docker push "kaidan/${image}:latest"
-		fi
-	done
+	if [ -f $IMAGE/Dockerfile ]; then
+		docker push "kaidan/${IMAGE}:latest"
+	fi
 }
 
 $1

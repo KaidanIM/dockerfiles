@@ -9,3 +9,10 @@ deploy:
   script: bash travis_docker.sh push
   on:
     branch: master
+
+matrix:
+  include:
+    - env: IMAGE=debian-unstable
+    - env: IMAGE=ubuntu-trusty
+    - env: IMAGE=ubuntu-touch-xenial
+
