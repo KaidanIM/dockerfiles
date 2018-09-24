@@ -7,7 +7,7 @@ RUN sudo apt update && \
 
 RUN sudo apt-get update && \
     sudo apt-get install -y -t trusty-backports \
-			 wget \
+                         wget \
                          cmake \
                          build-essential \
                          ninja-build \
