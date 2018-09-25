@@ -12,4 +12,5 @@ RUN pacman -Sy && \
         appstream \
         extra-cmake-modules \
 	ninja \
-        qt5-tools
+        qt5-tools \
+        base-devel
