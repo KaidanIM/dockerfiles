@@ -46,7 +46,7 @@ RUN sudo apt install -y \
 &&  cd .. \
 &&  sudo dpkg -i libgloox*.deb libgloox-dev*.deb \
 &&  rm -rf *gloox* \
-&&  apt purge -y \
+&&  apt purge --auto-remove -y \
         packaging-dev \
         debian-keyring \
         devscripts \
