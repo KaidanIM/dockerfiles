@@ -14,4 +14,5 @@ RUN pacman -Sy && \
 	ninja \
         qt5-tools \
         base-devel \
-        qt5-svg
+        qt5-svg \
+        libidn
