@@ -15,4 +15,4 @@ matrix:
     - env: IMAGE=debian-unstable
     - env: IMAGE=ubuntu-trusty
     - env: IMAGE=ubuntu-touch-xenial
-
+    - env: IMAGE=neon-bionic
