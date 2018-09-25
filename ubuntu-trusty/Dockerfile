@@ -36,7 +36,7 @@ RUN sudo apt install -y \
         equivs \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
 &&  cd gloox-1.0.20/ \
-&&  sudo apt-get build-dep . -y \
+&&  sudo apt-get build-dep gloox -y \
 &&  dch --local ~bpo14.04+ --distribution bionic-backports "Rebuild for trusty-backports." \
 &&  dpkg-buildpackage -us -uc \
 &&  cd .. \
