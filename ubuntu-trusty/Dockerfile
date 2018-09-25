@@ -29,10 +29,24 @@ RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/downloa
     tar xf kf5-5.50.0-Release-ubuntu-trusty-amd64.tar.xz -C /tmp/kf5 && \
     sudo cp -rf /tmp/kf5/* /opt/qt*/
 
-RUN wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/libgloox17_1.0.20-1_amd64.deb" && \
-    wget -c "https://github.com/JBBgameich/precompiled-kf5-linux/releases/download/KF5.40/libgloox-dev_1.0.20-1_amd64.deb" && \
-    sudo dpkg -i libgloox*.deb || sudo apt-get -f -y install && \
-    rm libgloox*.deb
+RUN sudo apt install -y \
+        packaging-dev \
+        debian-keyring \
+        devscripts \
+        equivs \
+&&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
+&&  cd gloox-1.0.20/ \
+&&  sudo apt-get build-dep . -y \
+&&  dch --local ~bpo14.04+ --distribution bionic-backports "Rebuild for trusty-backports." \
+&&  dpkg-buildpackage -us -uc \
+&&  cd .. \
+&&  sudo dpkg -i libgloox17*.deb libgloox-dev*.deb \
+&&  rm -rf *gloox* \
+&&  apt purge -y \
+        packaging-dev \
+        debian-keyring \
+        devscripts \
+        equivs
 
 ENV QT_BASE_DIR=/opt/qt510
 ENV QTDIR=$QT_BASE_DIR
