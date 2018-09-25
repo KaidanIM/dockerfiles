@@ -18,7 +18,8 @@ RUN sudo apt update \
         mesa-common-dev \
         libgl1-mesa-dev \
         libssl-dev \
-        appstream
+        appstream \
+        libqxmpp-dev
 
 RUN sudo apt install -y \
         packaging-dev \

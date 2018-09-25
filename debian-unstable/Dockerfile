@@ -18,4 +18,5 @@ RUN apt update && \
         mesa-common-dev \
         libgl1-mesa-dev \
         libssl-dev \
-        appstream
+        appstream \
+        libqxmpp-dev

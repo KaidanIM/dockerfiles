@@ -6,4 +6,5 @@ RUN apt update && \
         curl \
         extra-cmake-modules \
         kirigami2-dev:armhf \
-        ccache
+        ccache \
+        libqxmpp-dev
