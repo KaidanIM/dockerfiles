@@ -13,4 +13,5 @@ RUN pacman -Sy && \
         extra-cmake-modules \
 	ninja \
         qt5-tools \
-        base-devel
+        base-devel \
+        qt5-svg
