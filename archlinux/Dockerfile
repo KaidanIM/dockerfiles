@@ -7,4 +7,7 @@ RUN pacman -Sy && \
         qt5-quickcontrols2 \
         kirigami2 \
         gloox \
-        cmake
+        cmake \
+        ccache \
+        appstream \
+        extra-cmake-modules
