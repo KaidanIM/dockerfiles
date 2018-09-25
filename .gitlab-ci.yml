@@ -28,7 +28,14 @@ build debian-unstable:
   image: gitlab/dind
   script: bash travis_docker.sh build
   variables:
-    IMAGE: ubuntu-unstable
+    IMAGE: debian-unstable
+
+build archlinux:
+  stage: build
+  image: gitlab/dind
+  script: bash travis_docker.sh build
+  variables:
+    IMAGE: archlinux
 
 
 push ubuntu-trusty:
@@ -57,4 +64,11 @@ push debian-unstable:
   image: gitlab/dind
   script: bash travis_docker.sh push
   variables:
-    IMAGE: ubuntu-unstable
+    IMAGE: debian-unstable
+
+push archlinux
+  stage: deploy
+  image: gitlab/dind
+  script: bash travis_docker.sh push
+  variables:
+    IMAGE: archlinux

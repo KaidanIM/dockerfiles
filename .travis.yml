@@ -16,3 +16,4 @@ matrix:
     - env: IMAGE=ubuntu-trusty
     - env: IMAGE=ubuntu-touch-xenial
     - env: IMAGE=neon-bionic
+    - env: IMAGE=archlinux
