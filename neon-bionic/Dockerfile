@@ -26,7 +26,7 @@ RUN sudo apt install -y \
         devscripts \
         equivs \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
-&&  cd gloox_1.0.20/ \
+&&  cd gloox-1.0.20/ \
 &&  sudo mk-build-deps --install --remove \
 &&  dch --local ~bpo18.04+ --distribution bionic-backports "Rebuild for bionic-backports." \
 &&  dpkg-buildpackage -us -uc \
