@@ -39,7 +39,7 @@ RUN sudo apt install -y \
         debhelper \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
 &&  cd gloox-1.0.20/ \
-&&  sudo apt-get build-dep gloox -y \
+&&  sudo apt-get build-dep gloox -y -t trusty-backports \
 &&  dch --local ~bpo14.04+ --distribution bionic-backports "Rebuild for trusty-backports." \
 &&  echo "9" > debian/compat \
 &&  dpkg-buildpackage -us -uc -d \
