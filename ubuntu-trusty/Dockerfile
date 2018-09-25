@@ -3,7 +3,8 @@ FROM ubuntu:trusty
 RUN sudo apt update && \
     sudo apt-get install software-properties-common dirmngr -y && \
     sudo add-apt-repository -y ppa:beineri/opt-qt-5.10.1-trusty && \
-    sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
+    sudo add-apt-repository universe
 
 RUN sudo apt-get update && \
     sudo apt-get install -y -t trusty-backports \
@@ -34,11 +35,13 @@ RUN sudo apt install -y \
         debian-keyring \
         devscripts \
         equivs \
+        libgnutls28-dev \
+        debhelper
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
 &&  cd gloox-1.0.20/ \
 &&  sudo apt-get build-dep gloox -y \
 &&  dch --local ~bpo14.04+ --distribution bionic-backports "Rebuild for trusty-backports." \
-&&  dpkg-buildpackage -us -uc \
+&&  dpkg-buildpackage -us -uc -d \
 &&  cd .. \
 &&  sudo dpkg -i libgloox17*.deb libgloox-dev*.deb \
 &&  rm -rf *gloox* \
