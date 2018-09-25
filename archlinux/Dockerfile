@@ -10,4 +10,5 @@ RUN pacman -Sy && \
         cmake \
         ccache \
         appstream \
-        extra-cmake-modules
+        extra-cmake-modules \
+	ninja
