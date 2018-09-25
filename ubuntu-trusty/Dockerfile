@@ -36,7 +36,7 @@ RUN sudo apt install -y \
         devscripts \
         equivs \
         libgnutls28-dev \
-        debhelper
+        debhelper \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
 &&  cd gloox-1.0.20/ \
 &&  sudo apt-get build-dep gloox -y \
