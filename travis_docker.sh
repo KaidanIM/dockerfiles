@@ -3,16 +3,16 @@
 build() {
 	if [ -f $IMAGE/Dockerfile ]; then
 		cd $IMAGE
-		docker build -t "kaidan/${IMAGE}:latest" .
+		sudo docker build -t "kaidan/${IMAGE}:latest" .
 		cd ..
 	fi
 }
 
 push() {
-	echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+	echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin
 
 	if [ -f $IMAGE/Dockerfile ]; then
-		docker push "kaidan/${IMAGE}:latest"
+		sudo docker push "kaidan/${IMAGE}:latest"
 	fi
 }
 

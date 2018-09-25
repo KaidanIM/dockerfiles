@@ -1,0 +1,60 @@
+stages:
+  - build
+  - deploy
+
+build ubuntu-trusty:
+  stage: build
+  image: gitlab/dind
+  script: bash travis_docker.sh build
+  variables:
+    IMAGE: ubuntu-trusty
+
+build ubuntu-touch-xenial:
+  stage: build
+  image: gitlab/dind
+  script: bash travis_docker.sh build
+  variables:
+    IMAGE: ubuntu-touch-xenial
+
+build neon-bionic:
+  stage: build
+  image: gitlab/dind
+  script: bash travis_docker.sh build
+  variables:
+    IMAGE: neon-bionic
+
+build debian-unstable:
+  stage: build
+  image: gitlab/dind
+  script: bash travis_docker.sh build
+  variables:
+    IMAGE: ubuntu-unstable
+
+
+push ubuntu-trusty:
+  stage: deploy
+  image: gitlab/dind
+  script: bash travis_docker.sh push
+  variables:
+    IMAGE: ubuntu-trusty
+
+push ubuntu-touch-xenial:
+  stage: deploy
+  image: gitlab/dind
+  script: bash travis_docker.sh push
+  variables:
+    IMAGE: ubuntu-touch-xenial
+
+push neon-bionic:
+  stage: deploy
+  image: gitlab/dind
+  script: bash travis_docker.sh push
+  variables:
+    IMAGE: neon-bionic
+
+push debian-unstable:
+  stage: deploy
+  image: gitlab/dind
+  script: bash travis_docker.sh push
+  variables:
+    IMAGE: ubuntu-unstable
