@@ -37,14 +37,14 @@ RUN sudo apt install -y \
         equivs \
         debhelper \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
-&&  cd gloox-1.0.20/ \
+&&  cd gloox-*/ \
 &&  sed -i 's/libgnutls28-dev/libgnutls-dev/g' debian/control \
 &&  sudo apt-get build-dep gloox -y -t trusty-backports \
 &&  dch --local ~bpo14.04+ --distribution bionic-backports "Rebuild for trusty-backports." \
 &&  echo "9" > debian/compat \
 &&  dpkg-buildpackage -us -uc -d \
 &&  cd .. \
-&&  sudo dpkg -i libgloox17*.deb libgloox-dev*.deb \
+&&  sudo dpkg -i libgloox*.deb libgloox-dev*.deb \
 &&  rm -rf *gloox* \
 &&  apt purge -y \
         packaging-dev \

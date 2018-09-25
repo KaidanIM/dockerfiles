@@ -26,12 +26,12 @@ RUN sudo apt install -y \
         devscripts \
         equivs \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
-&&  cd gloox-1.0.20/ \
+&&  cd gloox-*/ \
 &&  sudo apt build-dep . -y \
 &&  dch --local ~bpo18.04+ --distribution bionic-backports "Rebuild for bionic-backports." \
 &&  dpkg-buildpackage -us -uc \
 &&  cd .. \
-&&  sudo dpkg -i libgloox17*.deb libgloox-dev*.deb \
+&&  sudo dpkg -i libgloox*.deb libgloox-dev*.deb \
 &&  rm -rf *gloox* \
 &&  sudo apt purge -y \
         packaging-dev \
