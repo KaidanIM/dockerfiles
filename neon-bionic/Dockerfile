@@ -1,7 +1,7 @@
 FROM kdeneon/plasma:dev-unstable-bionic
 
-RUN apt update && \
-    apt install -y \
+RUN sudo apt update && \
+    sudo apt install -y \
         cmake \
         ninja-build \
         kirigami2-dev \
