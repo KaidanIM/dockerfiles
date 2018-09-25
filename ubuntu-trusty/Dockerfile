@@ -41,6 +41,7 @@ RUN sudo apt install -y \
 &&  cd gloox-1.0.20/ \
 &&  sudo apt-get build-dep gloox -y \
 &&  dch --local ~bpo14.04+ --distribution bionic-backports "Rebuild for trusty-backports." \
+&&  echo "9" > debian/compat \
 &&  dpkg-buildpackage -us -uc -d \
 &&  cd .. \
 &&  sudo dpkg -i libgloox17*.deb libgloox-dev*.deb \
