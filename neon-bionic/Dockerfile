@@ -1,4 +1,4 @@
-FROM kdeneon/plasma:dev-unstable-bionic
+FROM kdeneon/plasma:dev-unstable
 
 RUN sudo apt update \
 &&  sudo apt install -y \
