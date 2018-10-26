@@ -26,7 +26,7 @@ RUN sudo apt-get update && \
                          libgl1-mesa-dev \
                          libssl-dev \
                          libqxmpp-dev \
-                         libfuse2
+                         fuse
 
 RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.50/kf5-5.50.0-Release-ubuntu-trusty-amd64.tar.xz" && \
     mkdir /tmp/kf5 && \
@@ -39,15 +39,17 @@ RUN sudo apt install -y \
         devscripts \
         equivs \
         debhelper \
+&&  echo "deb-src http://http.debian.net/debian sid main" >> /etc/apt/sources.list \
+&&  apt-get update \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
 &&  cd gloox-*/ \
 &&  sed -i 's/libgnutls28-dev/libgnutls-dev/g' debian/control \
 &&  sudo apt-get build-dep gloox -y -t trusty-backports \
-&&  dch --local ~bpo14.04+ --distribution bionic-backports "Rebuild for trusty-backports." \
+&&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
 &&  echo "9" > debian/compat \
 &&  dpkg-buildpackage -us -uc -d \
 &&  cd .. \
-&&  sudo dpkg -i libgloox*.deb libgloox-dev*.deb \
+&&  sudo dpkg -i libgloox*.deb \
 &&  rm -rf *gloox* \
 &&  apt purge --auto-remove -y \
         packaging-dev \
