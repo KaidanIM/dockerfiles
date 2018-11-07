@@ -22,6 +22,7 @@ RUN sudo apt-get update && \
                          qt510x11extras \
                          qt510svg \
                          qt510quickcontrols2 \
+                         qt510graphicaleffects \
                          mesa-common-dev \
                          libgl1-mesa-dev \
                          libssl-dev \
