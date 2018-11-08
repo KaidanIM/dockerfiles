@@ -45,7 +45,7 @@ RUN sudo apt install -y \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
 &&  cd gloox-*/ \
 &&  sed -i 's/libgnutls28-dev/libgnutls-dev/g' debian/control \
-&&  sed -i 's/debhelper (>= 11)/debhelper (>= 9)/g' \
+&&  sed -i 's/debhelper (>= 11)/debhelper (>= 9)/g' debian/control \
 &&  echo "9" > debian/compat \
 &&  sudo apt-get build-dep gloox -y -t trusty-backports \
 &&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
