@@ -35,26 +35,23 @@ RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/downloa
     sudo cp -rf /tmp/kf5/* /opt/qt*/
 
 RUN sudo apt install -y \
-        packaging-dev \
         debian-keyring \
         devscripts \
         equivs \
         debhelper \
-&&  echo "deb-src http://http.debian.net/debian sid main" >> /etc/apt/sources.list \
+&&  echo "deb-src http://archive.ubuntu.com/ubuntu trusty main restricted universe multiverse" >> /etc/apt/sources.list \
 &&  apt-get update \
 &&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
 &&  cd gloox-*/ \
 &&  sed -i 's/libgnutls28-dev/libgnutls-dev/g' debian/control \
-&&  sed -i 's/debhelper (>= 11)/debhelper (>= 9)/g' debian/control \
 &&  echo "9" > debian/compat \
-&&  sudo apt-get build-dep gloox -y -t trusty-backports \
+&&  sudo apt-get build-dep gloox -t trusty-backports -y \
 &&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
 &&  dpkg-buildpackage -us -uc -d \
 &&  cd .. \
 &&  sudo dpkg -i libgloox*.deb \
 &&  rm -rf *gloox* \
 &&  apt purge --auto-remove -y \
-        packaging-dev \
         debian-keyring \
         devscripts \
         equivs
