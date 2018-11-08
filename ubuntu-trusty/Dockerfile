@@ -29,7 +29,7 @@ RUN sudo apt-get update && \
                          libqxmpp-dev \
                          fuse
 
-RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.50/kf5-5.50.0-Release-ubuntu-trusty-amd64.tar.xz" && \
+RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.51/kf5-5.51.0-Release-ubuntu-trusty-amd64.tar.xz" && \
     mkdir /tmp/kf5 && \
     tar xf kf5-5.50.0-Release-ubuntu-trusty-amd64.tar.xz -C /tmp/kf5 && \
     sudo cp -rf /tmp/kf5/* /opt/qt*/
