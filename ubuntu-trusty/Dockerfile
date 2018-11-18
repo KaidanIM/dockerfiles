@@ -64,7 +64,7 @@ RUN sudo apt install -y \
 &&  dget -x http://archive.ubuntu.com/ubuntu/pool/universe/q/qxmpp/qxmpp_0.9.3-1build3.dsc \
 &&  cd qxmpp-*/ \
 &&  echo "9" > debian/compat \
-&&  sed -i 's/qtbase5-dev,//g' \
+&&  sed -i 's/qtbase5-dev,//g' debian/control \
 &&  sudo apt-get build-dep qxmpp -t trusty-backports -y \
 &&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
 &&  dpkg-buildpackage -us -uc -d \
