@@ -51,6 +51,15 @@ RUN sudo apt install -y \
 &&  cd .. \
 &&  sudo dpkg -i libgloox*.deb \
 &&  rm -rf *gloox* \
+&&  dget -x http://archive.ubuntu.com/ubuntu/pool/universe/q/qxmpp/qxmpp_0.9.3-1build3.dsc \
+&&  cd qxmpp-*/ \
+&&  echo "9" > debian/compat \
+&&  sudo apt-get build-dep qxmpp -t trusty-backports -y \
+&&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
+&&  dpkg-buildpackage -us -uc -d \
+&&  cd .. \
+&&  sudo dpkg -i libqxmpp*.deb \
+&&  rm -rf *qxmpp* \
 &&  apt purge --auto-remove -y \
         debian-keyring \
         devscripts \
