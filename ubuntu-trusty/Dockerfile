@@ -34,6 +34,13 @@ RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/downloa
     tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /tmp/kf5 && \
     sudo cp -rf /tmp/kf5/* /opt/qt*/
 
+ENV QT_BASE_DIR=/opt/qt510
+ENV QTDIR=$QT_BASE_DIR
+ENV PATH=$QT_BASE_DIR/bin:$PATH
+
+ENV LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
+ENV PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
+
 RUN sudo apt install -y \
         debian-keyring \
         devscripts \
@@ -64,10 +71,3 @@ RUN sudo apt install -y \
         debian-keyring \
         devscripts \
         equivs
-
-ENV QT_BASE_DIR=/opt/qt510
-ENV QTDIR=$QT_BASE_DIR
-ENV PATH=$QT_BASE_DIR/bin:$PATH
-
-ENV LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
-ENV PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
