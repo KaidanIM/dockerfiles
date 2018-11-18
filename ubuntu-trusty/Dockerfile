@@ -26,7 +26,7 @@ RUN sudo apt-get update && \
                          mesa-common-dev \
                          libgl1-mesa-dev \
                          libssl-dev \
-                         libqxmpp-dev \
+                         libopus-dev \
                          fuse
 
 RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" && \
