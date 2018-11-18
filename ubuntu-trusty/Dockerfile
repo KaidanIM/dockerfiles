@@ -68,7 +68,7 @@ RUN sudo apt install -y \
 &&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
 &&  dpkg-buildpackage -us -uc -d \
 &&  cd .. \
-&&  sudo dpkg -i libqxmpp*.deb \
+&&  sudo dpkg -i libqxmpp0*.deb libqxmpp-dev*.deb \
 &&  rm -rf *qxmpp* \
 &&  apt purge --auto-remove -y \
         debian-keyring \
