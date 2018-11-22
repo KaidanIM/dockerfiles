@@ -21,7 +21,7 @@ RUN pacman -Sy && \
 # Build latest QXmpp
 RUN git clone https://github.com/qxmpp-project/qxmpp \
  && cd qxmpp \
- && cmake . -GNinja -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
  && ninja install \
  && cd ../ \
  && rm -rf qxmpp
