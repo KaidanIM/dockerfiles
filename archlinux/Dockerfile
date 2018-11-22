@@ -2,17 +2,26 @@ FROM archlinux/base
 
 RUN pacman -Sy && \
     pacman -S --noconfirm \
+        git \
+        base-devel \
+        appstream \
+        ccache \
+        cmake \
+        extra-cmake-modules \
+        ninja \
         qt5-base \
         qt5-declarative \
         qt5-quickcontrols2 \
-        kirigami2 \
-        gloox \
-        cmake \
-        ccache \
-        appstream \
-        extra-cmake-modules \
-	ninja \
         qt5-tools \
-        base-devel \
         qt5-svg \
-        libidn
+        kirigami2 \
+        libidn \
+        gloox
+
+# Build latest QXmpp
+RUN git clone https://github.com/qxmpp-project/qxmpp \
+ && cd qxmpp \
+ && cmake . -GNinja \
+ && ninja install \
+ && cd ../ \
+ && rm -rf qxmpp
