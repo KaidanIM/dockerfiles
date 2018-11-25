@@ -20,6 +20,6 @@ make -C $MXE_ROOT \
 echo "- Replacing absolute with relative pathes"
 for file in $(find $MXE_ROOT/usr/); do
 	if [ ! -z "$(file $file | awk -F: '/ASCII text/ {print $1}')" ]; then
-		sed -i "s|$MXE_ROOT|\$MXE_ROOT|g" $file
+		sed -i "s|$MXE_ROOT||g" $file
 	fi
 done
