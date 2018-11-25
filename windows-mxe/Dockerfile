@@ -43,6 +43,8 @@ COPY --from=builder /build/mxe.tar.gz /tmp/mxe.tar.gz
 RUN tar -xf /tmp/mxe.tar.gz -C /
 
 # Runtime dependencies for compiling
-RUN apt install extra-cake-modules inkscape
+RUN apt update && \
+    apt install extra-cmake-modules inkscape make libfl2 optipng --no-install-recommends -y && \
+    ln -s /usr/bin/x86_64-w64-mingw32.static-as /usr/bin/as
 
 ENV MXE_ROOT=/
