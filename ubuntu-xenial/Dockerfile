@@ -1,12 +1,12 @@
 FROM ubuntu:xenial
 
-RUN sudo apt update \
-&&  sudo apt-get install software-properties-common dirmngr -y \
-&&  sudo add-apt-repository -y ppa:beineri/opt-qt-5.11.2-xenial \
-&&  sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test \
-&&  sudo add-apt-repository -y universe \
-&&  sudo apt-get update \
-&&  sudo apt-get install -y -t xenial-backports \
+RUN apt update \
+&&  apt-get install software-properties-common dirmngr -y \
+&&  add-apt-repository -y ppa:beineri/opt-qt-5.11.2-xenial \
+&&  add-apt-repository -y ppa:ubuntu-toolchain-r/test \
+&&  add-apt-repository -y universe \
+&&  apt-get update \
+&&  apt-get install -y -t xenial-backports \
                          wget \
                          git \
                          pkg-config \
@@ -26,7 +26,7 @@ RUN sudo apt update \
                          mesa-common-dev \
                          libgl1-mesa-dev \
                          libssl-dev \
-&&  sudo apt-get clean
+&&  apt-get clean
 
 RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
 &&  tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/qt5*/
