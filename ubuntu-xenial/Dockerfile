@@ -10,7 +10,7 @@ RUN apt update \
                          wget \
                          git \
                          pkg-config \
-                         cmake3 \
+                         cmake \
                          ccache \
                          build-essential \
                          ninja-build \
