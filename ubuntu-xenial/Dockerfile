@@ -17,11 +17,14 @@ RUN sudo apt update \
                          mesa-common-dev \
                          libgl1-mesa-dev \
                          libssl-dev \
+                         libxi6 \
+                         libmysqlclient-dev \
 &&  sudo apt-get clean
 
 RUN sudo mkdir -p /opt/kf5 \
 &&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
-&&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/
+&&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
+&&  sudo rm kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz
 
 ENV KF5_DIR=/opt/kf5
 ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
