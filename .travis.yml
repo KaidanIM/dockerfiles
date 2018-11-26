@@ -14,6 +14,7 @@ matrix:
   include:
     - env: IMAGE=debian-unstable
     - env: IMAGE=ubuntu-trusty
+    - env: IMAGE=ubuntu-xenial
     - env: IMAGE=ubuntu-touch-xenial
     - env: IMAGE=neon-bionic
     - env: IMAGE=archlinux
