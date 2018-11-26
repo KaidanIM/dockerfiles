@@ -19,6 +19,7 @@ RUN sudo apt update \
                          libssl-dev \
                          libxi6 \
                          libegl1-mesa \
+                         libpq5 \
 &&  sudo apt-get clean
 
 RUN wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/mysql-common_5.5.62-0ubuntu0.14.04.1_all.deb \
