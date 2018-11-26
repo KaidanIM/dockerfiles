@@ -31,13 +31,6 @@ RUN apt update \
 RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
 &&  tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/qt5*/
 
-RUN git clone https://github.com/qxmpp-project/qxmpp \
-&&  cd qxmpp \
-&&  cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
-&&  ninja install \
-&&  cd ../ \
-&&  rm -rf qxmpp
-
 ENV QT_BASE_DIR=/opt/qt511
 ENV QTDIR=$QT_BASE_DIR
 ENV PATH=$QT_BASE_DIR/bin:$PATH
@@ -46,4 +39,11 @@ ENV LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRA
 ENV PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 
 ENV QT_LINUX=$QT_BASE_DIR
+
+RUN git clone https://github.com/qxmpp-project/qxmpp \
+&&  cd qxmpp \
+&&  cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
+&&  ninja install \
+&&  cd ../ \
+&&  rm -rf qxmpp
 
