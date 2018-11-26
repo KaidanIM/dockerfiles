@@ -19,7 +19,8 @@ RUN sudo apt update \
                          libssl-dev \
 &&  sudo apt-get clean
 
-RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
+RUN sudo mkdir -p /opt/kf5 \
+&&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
 &&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/
 
 ENV KF5_DIR=/opt/kf5
