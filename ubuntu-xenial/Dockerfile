@@ -18,9 +18,13 @@ RUN sudo apt update \
                          libgl1-mesa-dev \
                          libssl-dev \
                          libxi6 \
-                         libmysqlclient-dev \
                          libegl1-mesa \
 &&  sudo apt-get clean
+
+RUN wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/mysql-common_5.5.62-0ubuntu0.14.04.1_all.deb \
+&&  wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/libmysqlclient18_5.5.62-0ubuntu0.14.04.1_amd64.deb \
+&&  sudo dpkg -i *.deb \
+&&  rm -rf *.deb
 
 RUN sudo mkdir -p /opt/kf5 \
 &&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
