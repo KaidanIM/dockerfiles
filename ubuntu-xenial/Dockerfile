@@ -19,6 +19,7 @@ RUN sudo apt update \
                          libssl-dev \
                          libxi6 \
                          libmysqlclient-dev \
+                         libegl1-mesa \
 &&  sudo apt-get clean
 
 RUN sudo mkdir -p /opt/kf5 \
