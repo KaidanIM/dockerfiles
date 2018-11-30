@@ -29,8 +29,7 @@ RUN apt update \
                     libssl-dev \
 &&  apt-get clean
 
-RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
-&&  tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/qt5*/
+RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" -O - | tar xJ -C /opt/qt5*/
 
 ENV QT_BASE_DIR=/opt/qt511
 ENV QTDIR=$QT_BASE_DIR
