@@ -19,7 +19,8 @@ RUN sudo apt update \
         libgl1-mesa-dev \
         libssl-dev \
         appstream \
-        libqxmpp-dev
+        libqxmpp-dev \
+        clazy
 
 RUN sudo apt install -y \
         packaging-dev \
