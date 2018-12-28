@@ -21,7 +21,8 @@ RUN sudo apt update \
         appstream \
         libqxmpp-dev \
         clazy \
-        clang
+        clang \
+        qtdeclarative5-dev-tools
 
 RUN sudo apt install -y \
         packaging-dev \
