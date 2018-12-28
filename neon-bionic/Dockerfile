@@ -20,7 +20,8 @@ RUN sudo apt update \
         libssl-dev \
         appstream \
         libqxmpp-dev \
-        clazy
+        clazy \
+        clang
 
 RUN sudo apt install -y \
         packaging-dev \
