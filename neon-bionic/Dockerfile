@@ -29,10 +29,10 @@ RUN sudo apt install -y \
         debian-keyring \
         devscripts \
         equivs \
-&&  git clone https://git.kaidan.im/kaidan/qxmpp-packaging qxmpp && cd qxmpp
-&&  uscan -v
-&&  cd ../qxmpp-0.9.3+git*.*
-&&  sudo apt build-dep .
+&&  git clone https://git.kaidan.im/kaidan/qxmpp-packaging qxmpp && cd qxmpp \
+&&  uscan -v \
+&&  cd ../qxmpp-0.9.3+git*.* \
+&&  sudo apt build-dep . \
 &&  dch --local ~bpo18.04+ --distribution bionic-backports "Rebuild for bionic-backports." \
 &&  dpkg-buildpackage -us -uc \
 &&  cd .. \
