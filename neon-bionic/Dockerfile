@@ -29,9 +29,10 @@ RUN sudo apt install -y \
         debian-keyring \
         devscripts \
         equivs \
-&&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
-&&  cd gloox-*/ \
-&&  sudo apt build-dep . -y \
+&&  git clone https://git.kaidan.im/kaidan/qxmpp-packaging qxmpp && cd qxmpp
+&&  uscan -v
+&&  cd ../qxmpp-0.9.3+git*.*
+&&  sudo apt build-dep .
 &&  dch --local ~bpo18.04+ --distribution bionic-backports "Rebuild for bionic-backports." \
 &&  dpkg-buildpackage -us -uc \
 &&  cd .. \
