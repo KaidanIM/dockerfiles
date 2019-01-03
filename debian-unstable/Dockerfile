@@ -20,3 +20,22 @@ RUN apt update && \
         libssl-dev \
         appstream \
         libqxmpp-dev
+
+# Build latest QXmpp
+RUN apt install -y \
+        cmake \
+        git \
+        debhelper \
+        doxygen \
+        graphviz \
+        libopus-dev \
+        libspeex-dev \
+        libtheora-dev \
+        libvpx-dev \
+        qtbase5-dev \
+ && git clone https://github.com/qxmpp-project/qxmpp \
+ && cd qxmpp \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
+ && ninja install \
+ && cd ../ \
+ && rm -rf qxmpp
