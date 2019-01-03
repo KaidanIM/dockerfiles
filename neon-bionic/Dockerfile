@@ -24,22 +24,21 @@ RUN sudo apt update \
         clang \
         qtdeclarative5-dev-tools
 
+# Build latest QXmpp
 RUN sudo apt install -y \
-        packaging-dev \
-        debian-keyring \
-        devscripts \
-        equivs \
-&&  git clone https://git.kaidan.im/kaidan/qxmpp-packaging qxmpp && cd qxmpp \
-&&  uscan -v \
-&&  cd ../qxmpp-0.9.3+git*.* \
-&&  sudo apt build-dep . \
-&&  dch --local ~bpo18.04+ --distribution bionic-backports "Rebuild for bionic-backports." \
-&&  dpkg-buildpackage -us -uc \
-&&  cd .. \
-&&  sudo dpkg -i libgloox*.deb libgloox-dev*.deb \
-&&  rm -rf *gloox* \
-&&  sudo apt purge --auto-remove -y \
-        packaging-dev \
-        debian-keyring \
-        devscripts \
-        equivs
+        cmake \
+        git \
+        debhelper \
+        doxygen \
+        graphviz \
+        libopus-dev \
+        libspeex-dev \
+        libtheora-dev \
+        libvpx-dev \
+        qtbase5-dev \
+ && git clone https://github.com/qxmpp-project/qxmpp \
+ && cd qxmpp \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
+ && sudo ninja install \
+ && cd ../ \
+ && sudo rm -rf qxmpp
