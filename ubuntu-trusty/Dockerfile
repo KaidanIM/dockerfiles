@@ -46,7 +46,6 @@ ENV PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # Build latest QXmpp
 RUN sudo apt install -y \
-        cmake \
         git \
         debhelper \
         doxygen \
