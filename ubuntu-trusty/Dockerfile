@@ -44,34 +44,21 @@ ENV PATH=$QT_BASE_DIR/bin:$PATH
 ENV LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
 ENV PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 
+# Build latest QXmpp
 RUN sudo apt install -y \
-        debian-keyring \
-        devscripts \
-        equivs \
+        cmake \
+        git \
         debhelper \
-&&  echo "deb-src http://archive.ubuntu.com/ubuntu trusty main restricted universe multiverse" >> /etc/apt/sources.list \
-&&  apt-get update \
-&&  dget -x http://http.debian.net/debian/pool/main/g/gloox/gloox_1.0.20-2.dsc \
-&&  cd gloox-*/ \
-&&  sed -i 's/libgnutls28-dev/libgnutls-dev/g' debian/control \
-&&  echo "9" > debian/compat \
-&&  sudo apt-get build-dep gloox -t trusty-backports -y \
-&&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
-&&  dpkg-buildpackage -us -uc -d \
-&&  cd .. \
-&&  sudo dpkg -i libgloox*.deb \
-&&  rm -rf *gloox* \
-&&  dget -x http://archive.ubuntu.com/ubuntu/pool/universe/q/qxmpp/qxmpp_0.9.3-1build3.dsc \
-&&  cd qxmpp-*/ \
-&&  echo "9" > debian/compat \
-&&  sed -i 's/qtbase5-dev,//g' debian/control \
-&&  sudo apt-get build-dep qxmpp -t trusty-backports -y \
-&&  dch --local ~bpo14.04+ --distribution trusty-backports "Rebuild for trusty-backports." \
-&&  dpkg-buildpackage -us -uc -d \
-&&  cd .. \
-&&  sudo dpkg -i libqxmpp0*.deb libqxmpp-dev*.deb \
-&&  rm -rf *qxmpp* \
-&&  apt purge --auto-remove -y \
-        debian-keyring \
-        devscripts \
-        equivs
+        doxygen \
+        graphviz \
+        libopus-dev \
+        libspeex-dev \
+        libtheora-dev \
+        libvpx-dev \
+        qtbase5-dev \
+ && git clone https://github.com/qxmpp-project/qxmpp \
+ && cd qxmpp \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
+ && sudo ninja install \
+ && cd ../ \
+ && sudo rm -rf qxmpp
