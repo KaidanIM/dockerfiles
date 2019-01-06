@@ -73,6 +73,7 @@ RUN sudo apt-get update && \
                          libxi6 \
                          libegl1-mesa \
                          libpq5 \
+                         libdbus-1-3 \
 &&  sudo apt-get clean
 
 
