@@ -68,19 +68,30 @@ RUN sudo apt-get update && \
                          libopus-dev \
                          libvpx-dev \
                          libspeex-dev \
-                         libtheora-dev
+                         libtheora-dev \
+                         libssl-dev \
+                         libxi6 \
+                         libegl1-mesa \
+                         libpq5 \
+&&  sudo apt-get clean
 
-RUN wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" && \
-    mkdir /tmp/kf5 && \
-    tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /tmp/kf5 && \
-    sudo cp -rf /tmp/kf5/* /opt/qt*/
 
-ENV QT_BASE_DIR=/opt/qt510
-ENV QTDIR=$QT_BASE_DIR
-ENV PATH=$QT_BASE_DIR/bin:$PATH
+RUN wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/mysql-common_5.5.62-0ubuntu0.14.04.1_all.deb \
+&&  wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/libmysqlclient18_5.5.62-0ubuntu0.14.04.1_amd64.deb \
+&&  sudo dpkg -i *.deb \
+&&  rm -rf *.deb
 
-ENV LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
-ENV PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
+RUN sudo mkdir -p /opt/kf5 \
+&&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
+&&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
+&&  sudo rm kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz
+
+ENV KF5_DIR=/opt/kf5
+ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
+ENV PKG_CONFIG_PATH=$KF5_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
+ENV PATH=$KF5_DIR/bin:$PATH
+
+ENV QT_LINUX=$QT_DESKTOP
 
 # Build latest QXmpp
 RUN sudo apt install -y \
