@@ -3,7 +3,7 @@ FROM ubuntu:trusty
 RUN sudo apt update && \
     sudo apt-get install software-properties-common dirmngr -y && \
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
-    sudo add-apt-repository -y universe \
+    sudo add-apt-repository -y universe && \
     sudo add-apt-repository -y ppa:ondrej/apache2
 
 # Qt
