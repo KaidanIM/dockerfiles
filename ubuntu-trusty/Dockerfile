@@ -74,6 +74,8 @@ RUN sudo apt-get update && \
                          libegl1-mesa \
                          libpq5 \
                          libdbus-1-3 \
+                         g++-8 \
+                         gcc-8 \
 &&  sudo apt-get clean
 
 
