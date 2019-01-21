@@ -7,7 +7,7 @@ RUN sudo apt update && \
 #    sudo add-apt-repository -y ppa:ondrej/apache2
 
 # Qt
-ARG QT_VERSION=5.12.0
+ARG QT_VERSION=5.11.3
 
 ENV DEBIAN_FRONTEND=noninteractive \
     QT_PATH=/opt/Qt
