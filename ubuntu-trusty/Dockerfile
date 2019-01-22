@@ -1,12 +1,12 @@
 FROM ubuntu:trusty
 
+# Add PPAs
 RUN sudo apt update && \
     sudo apt-get install software-properties-common dirmngr -y && \
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
-    sudo add-apt-repository -y universe && \
     sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/nginx
 
-# Qt
+# Install Qt
 ARG QT_VERSION=5.11.3
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -50,8 +50,6 @@ RUN curl -Lo /tmp/qt/installer.run "https://download.qt.io/official_releases/qt/
 # Reconfigure locale
 RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
 
-# /Qt
-
 RUN sudo apt-get update && \
     sudo apt-get install -y -t trusty-backports \
                          wget \
@@ -74,22 +72,15 @@ RUN sudo apt-get update && \
                          libegl1-mesa \
                          libpq5 \
                          libdbus-1-3 \
-                         g++-8 \
-                         gcc-8 \
+                         mysql-common \
+                         libmysqlclient18 \
 &&  sudo apt-get clean
 
-
-RUN wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/mysql-common_5.5.62-0ubuntu0.14.04.1_all.deb \
-&&  wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/libmysqlclient18_5.5.62-0ubuntu0.14.04.1_amd64.deb \
-&&  sudo dpkg -i *.deb \
-&&  rm -rf *.deb
-
+# Install KF5
 RUN sudo mkdir -p /opt/kf5 \
 &&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
 &&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
 &&  sudo rm kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz
-
-RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | sudo tar xz -C /usr --strip-components=1
 
 ENV KF5_DIR=/opt/kf5
 ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
@@ -97,6 +88,9 @@ ENV PKG_CONFIG_PATH=$KF5_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV PATH=$KF5_DIR/bin:$PATH
 
 ENV QT_LINUX=$QT_DESKTOP
+
+# Update CMAKE
+RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | sudo tar xz -C /usr --strip-components=1
 
 # Build latest QXmpp
 RUN sudo apt install -y \
