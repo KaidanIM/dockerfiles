@@ -89,6 +89,8 @@ RUN sudo mkdir -p /opt/kf5 \
 &&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
 &&  sudo rm kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz
 
+RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | sudo tar xz -C /usr --strip-components=1
+
 ENV KF5_DIR=/opt/kf5
 ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
 ENV PKG_CONFIG_PATH=$KF5_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
