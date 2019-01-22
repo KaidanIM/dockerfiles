@@ -3,8 +3,8 @@ FROM ubuntu:trusty
 RUN sudo apt update && \
     sudo apt-get install software-properties-common dirmngr -y && \
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
-    sudo add-apt-repository -y universe
-#    sudo add-apt-repository -y ppa:ondrej/apache2
+    sudo add-apt-repository -y universe && \
+    sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/nginx
 
 # Qt
 ARG QT_VERSION=5.11.3
