@@ -28,9 +28,9 @@ RUN wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/mysql-common_5.
 &&  rm -rf *.deb
 
 RUN sudo mkdir -p /opt/kf5 \
-&&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/KF5.54/kf5-5.54.0-Release-ubuntu-trusty-amd64.tar.xz" \
-&&  sudo tar xf kf5-5.54.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
-&&  sudo rm kf5-5.54.0-Release-ubuntu-trusty-amd64.tar.xz
+&&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
+&&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
+&&  sudo rm kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz
 
 ENV KF5_DIR=/opt/kf5
 ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
