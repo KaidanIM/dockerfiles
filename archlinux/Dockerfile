@@ -1,6 +1,6 @@
 FROM archlinux/base
 
-RUN pacman -Sy && \
+RUN pacman -Syu && \
     pacman -S --noconfirm \
         git \
         base-devel \
