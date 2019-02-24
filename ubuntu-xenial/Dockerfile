@@ -27,17 +27,20 @@ RUN wget http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.5/mysql-common_5.
 &&  sudo dpkg -i *.deb \
 &&  rm -rf *.deb
 
-RUN sudo mkdir -p /opt/kf5 \
-&&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
-&&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
-&&  sudo rm kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz
-
 ENV KF5_DIR=/opt/kf5
 ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
 ENV PKG_CONFIG_PATH=$KF5_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV PATH=$KF5_DIR/bin:$PATH
 
 ENV QT_LINUX=$QT_DESKTOP
+
+# Install kdesrc-build dependencies
+RUN apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf -y
+
+# Install KF5
+RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild
+COPY kdesrc-buildrc /root/.kdesrc-buildrc
+RUN kdesrc-build --include-dependencies kirigami --verbose && rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
 
 RUN git clone https://github.com/qxmpp-project/qxmpp \
 &&  cd qxmpp \
