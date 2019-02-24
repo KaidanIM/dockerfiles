@@ -7,7 +7,7 @@ RUN sudo apt update && \
     sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/nginx
 
 # Install Qt
-ARG QT_VERSION=5.11.3
+ARG QT_VERSION=5.12.1
 
 ENV DEBIAN_FRONTEND=noninteractive \
     QT_PATH=/opt/Qt
@@ -76,21 +76,23 @@ RUN sudo apt-get update && \
                          libmysqlclient18 \
 &&  sudo apt-get clean
 
-# Install KF5
-RUN sudo mkdir -p /opt/kf5 \
-&&  sudo wget -c "https://github.com/kf5builds/precompiled-kf5-linux/releases/download/kf5.52/kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz" \
-&&  sudo tar xf kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz -C /opt/kf5/ \
-&&  sudo rm kf5-5.52.0-Release-ubuntu-trusty-amd64.tar.xz
-
 ENV KF5_DIR=/opt/kf5
 ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
 ENV PKG_CONFIG_PATH=$KF5_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
-ENV PATH=$KF5_DIR/bin:$PATH
+ENV PATH=$KF5_DIR/bin:/var/opt/kdesrcbuild:$PATH
 
 ENV QT_LINUX=$QT_DESKTOP
 
 # Update CMAKE
 RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | sudo tar xz -C /usr --strip-components=1
+
+# Install kdesrc-build dependencies
+RUN apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf -y
+
+# Install KF5
+RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild
+COPY kdesrc-buildrc /root/.kdesrc-buildrc
+RUN kdesrc-build --include-dependencies kirigami --verbose && rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
 
 # Build latest QXmpp
 RUN sudo apt install -y \
