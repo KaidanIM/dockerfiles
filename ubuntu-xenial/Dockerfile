@@ -35,12 +35,12 @@ ENV PATH=$KF5_DIR/bin:$PATH
 ENV QT_LINUX=$QT_DESKTOP
 
 # Install kdesrc-build dependencies
-RUN apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf -y
+RUN sudo apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf -y
 
 # Install KF5
-RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild
+RUN sudo git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild
 COPY kdesrc-buildrc /root/.kdesrc-buildrc
-RUN kdesrc-build --include-dependencies kirigami --verbose && rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
+RUN sudo kdesrc-build --include-dependencies kirigami --verbose && sudo rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
 
 RUN git clone https://github.com/qxmpp-project/qxmpp \
 &&  cd qxmpp \
