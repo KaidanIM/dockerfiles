@@ -7,7 +7,7 @@ RUN sudo apt update && \
     sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/nginx
 
 # Install Qt
-ARG QT_VERSION=5.12.1
+ARG QT_VERSION=5.12.2
 
 ENV DEBIAN_FRONTEND=noninteractive \
     QT_PATH=/opt/Qt
