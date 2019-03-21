@@ -74,6 +74,7 @@ RUN sudo apt-get update && \
                          libdbus-1-3 \
                          mysql-common \
                          libmysqlclient18 \
+                         libxkbcommon-x11-0 \
 &&  sudo apt-get clean
 
 ENV KF5_DIR=/opt/kf5
