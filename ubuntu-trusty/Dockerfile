@@ -90,7 +90,8 @@ RUN wget http://security.ubuntu.com/ubuntu/pool/main/d/dbus/libdbus-1-3_1.10.6-1
     http://de.archive.ubuntu.com/ubuntu/pool/main/libg/libgcrypt20/libgcrypt20_1.6.5-2ubuntu0.5_amd64.deb \
     http://de.archive.ubuntu.com/ubuntu/pool/main/libg/libgpg-error/libgpg-error0_1.21-2ubuntu1_amd64.deb \
     http://de.archive.ubuntu.com/ubuntu/pool/main/u/unixodbc/libodbc1_2.3.1-4.1_amd64.deb \
-    http://archive.ubuntu.com/ubuntu/pool/main/libt/libtool/libltdl7_2.4.6-0.1_amd64.deb && \
+    http://archive.ubuntu.com/ubuntu/pool/main/libt/libtool/libltdl7_2.4.6-0.1_amd64.deb \
+    http://security.ubuntu.com/ubuntu/pool/main/f/freetype/libfreetype6_2.6.1-0.1ubuntu2.3_amd64.deb && \
     dpkg -i libgpg-error0_1.21-2ubuntu1_amd64.deb libgcrypt20_1.6.5-2ubuntu0.5_amd64.deb && \
     dpkg -i *.deb && \
     rm *.deb && apt install -f -y
