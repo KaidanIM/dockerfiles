@@ -88,10 +88,12 @@ ENV QT_LINUX=$QT_DESKTOP
 RUN wget http://security.ubuntu.com/ubuntu/pool/main/d/dbus/libdbus-1-3_1.10.6-1ubuntu3.1_amd64.deb \
     http://de.archive.ubuntu.com/ubuntu/pool/main/s/systemd/libsystemd0_229-4ubuntu21.17_amd64.deb \
     http://de.archive.ubuntu.com/ubuntu/pool/main/libg/libgcrypt20/libgcrypt20_1.6.5-2ubuntu0.5_amd64.deb \
-    http://de.archive.ubuntu.com/ubuntu/pool/main/libg/libgpg-error/libgpg-error0_1.21-2ubuntu1_amd64.deb && \
+    http://de.archive.ubuntu.com/ubuntu/pool/main/libg/libgpg-error/libgpg-error0_1.21-2ubuntu1_amd64.deb \
+    http://de.archive.ubuntu.com/ubuntu/pool/main/u/unixodbc/libodbc1_2.3.1-4.1_amd64.deb \
+    http://archive.ubuntu.com/ubuntu/pool/main/libt/libtool/libltdl7_2.4.6-0.1_amd64.deb && \
     dpkg -i libgpg-error0_1.21-2ubuntu1_amd64.deb libgcrypt20_1.6.5-2ubuntu0.5_amd64.deb && \
-    dpkg -i libdbus-1-3_1.10.6-1ubuntu3.1_amd64.deb libsystemd0_229-4ubuntu21.17_amd64.deb libgpg-error0_1.21-2ubuntu1_amd64.deb && \
-    rm libdbus-1-3_1.10.6-1ubuntu3.1_amd64.deb libsystemd0_229-4ubuntu21.17_amd64.deb libgcrypt20_1.6.5-2ubuntu0.5_amd64.deb libgpg-error0_1.21-2ubuntu1_amd64.deb && apt install -f -y
+    dpkg -i *.deb && \
+    rm *.deb && apt install -f -y
 
 # Update CMAKE
 RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | sudo tar xz -C /usr --strip-components=1
