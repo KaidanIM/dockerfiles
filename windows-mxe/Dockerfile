@@ -1,50 +1,13 @@
 # Builder
-FROM debian:testing-slim as builder
+FROM debian:testing-slim
 
-RUN mkdir -p /build/
-WORKDIR /build
+RUN apt update && apt install ca-certificates software-properties-common gpg -y && \
+    echo "deb https://dl.mumble.info/mirror/mirror.mxe.cc/repos/apt stretch main" >> /etc/apt/sources.list && \
+    apt-key adv  --keyserver keyserver.ubuntu.com --recv C6BF758A33A3A276 && apt update && \
+    apt install mxe-x86-64-w64-mingw32.static-qtbase mxe-x86-64-w64-mingw32.static-qtdeclarative mxe-x86-64-w64-mingw32.static-qtquickcontrols2 mxe-x86-64-w64-mingw32.static-quazip mxe-x86-64-w64-mingw32.static-poppler mxe-x86-64-w64-mingw32.static-qtscript mxe-x86-64-w64-mingw32.static-qtsvg extra-cmake-modules mxe-x86-64-w64-mingw32.static-qtgraphicaleffects inkscape optipng -y
 
-RUN apt update && \
-	apt install -y \
-	autotools-dev \
-	p7zip-full \
-	libgdk-pixbuf2.0-bin \
-	git \
-	make \
-	build-essential \
-	wget \
-	file \
-	python2 \
-	automake \
-	ruby \
-	flex \
-	bison \
-	gperf \
-	unzip \
-	python3 \
-	autopoint \
-	libtool \
-	libtool-bin \
-	intltool \
-	python-minimal \
-	pkg-config
+RUN apt install mxe-x86-64-w64-mingw32.static-qttools -y
 
-# Build mxe
-ADD build-mxe.sh /usr/bin/build-mxe
-RUN /usr/bin/build-mxe
-
-RUN tar -czf mxe.tar.gz -C /build/mxe/ usr/
-
-
-# Runner
-FROM debian:testing-slim as runner
-
-COPY --from=builder /build/mxe.tar.gz /tmp/mxe.tar.gz
-RUN tar -xf /tmp/mxe.tar.gz -C /
-
-# Runtime dependencies for compiling
-RUN apt update && \
-    apt install extra-cmake-modules inkscape make libfl2 optipng --no-install-recommends -y && \
-    ln -s /usr/bin/x86_64-w64-mingw32.static-as /usr/bin/as
-
-ENV MXE_ROOT=/
+ENV MXE_ROOT=/usr/lib/mxe/
+ENV MXE_TARGET=x86_64-w64-mingw32.static
+ENV PATH=$MXE_ROOT/usr/$MXE_TARGET/bin:$PATH
