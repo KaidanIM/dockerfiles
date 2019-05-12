@@ -1,0 +1,29 @@
+From a08c79d793f97d3b42d95e0e38d1612fead5c6e7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jonah=20Br=C3=BCchert?= <jbb.prv@gmx.de>
+Date: Sun, 12 May 2019 18:20:08 +0200
+Subject: [PATCH] tools: osxcross-macports: Avoid universal packages
+
+---
+ tools/osxcross-macports | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/tools/osxcross-macports b/tools/osxcross-macports
+index 46d300f..193fb03 100755
+--- a/tools/osxcross-macports
++++ b/tools/osxcross-macports
+@@ -262,7 +262,11 @@ getPkgUrl()
+     verboseMsg "  $p"
+   done
+ 
+-  local pkg=$(echo "$pkgs" | grep $OSXVERSION | grep $ARCH | uniq | tail -n1)
++  if [ $ARCH != "i386-x86_64" ]; then
++    local pkg=$(echo "$pkgs" | grep $OSXVERSION | grep $ARCH | grep --invert-match universal | uniq | tail -n1)
++  else
++    local pkg=$(echo "$pkgs" | grep $OSXVERSION | grep $ARCH | uniq | tail -n1)
++  fi
+   if [ -z "$pkg" ]; then
+     pkg=$(echo "$pkgs" | grep $OSXVERSION | grep "noarch" | uniq | tail -n1)
+   fi
+-- 
+2.20.1
+
