@@ -26,7 +26,7 @@ RUN apt-get install -y make ccache qt5-default qttools5-dev-tools p7zip-full pyt
 # Install Qt
 RUN mkdir -p /opt/osxcross/target/macports/pkgs/opt/local/ && cd /tmp/ && \
     wget -q https://git.sr.ht/~lnj/qli-installer/blob/master/qli-installer.py && \
-    python3 ./qli-installer.py 5.12.0 mac desktop && \
+    python3 ./qli-installer.py 5.13.0 mac desktop && \
     mv /tmp/*/clang_64/* /opt/osxcross/target/macports/pkgs/opt/local/
 
 # Install Qt dependencies
@@ -50,7 +50,7 @@ RUN git clone https://github.com/liushuyu/osxcross-extras && cd osxcross-extras 
     ./install_extras.sh
 
 # Install kaidan dependencies
-RUN apt-get install extra-cmake-modules inkscape optipng -y
+RUN apt-get install extra-cmake-modules inkscape optipng icnsutils -y
 
 # Clean up
 RUN rm /tmp/* -r
