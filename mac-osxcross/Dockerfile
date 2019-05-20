@@ -42,7 +42,7 @@ ENV QT_MACOS=/opt/osxcross/target/macports/pkgs/opt/local/
 # Use Qt host tools
 RUN rm -rf '/opt/osxcross/target/macports/pkgs/opt/local/bin/'* && \
     echo 'Replacing Qt Tools with native binaries...' && \
-    for i in 'moc' 'qdbuscpp2xml' 'qdbusxml2cpp' 'qlalr' 'qmake' 'rcc' 'uic' 'lconvert' 'lrelease' 'lupdate'; do \
+    for i in 'moc' 'qdbuscpp2xml' 'qdbusxml2cpp' 'qlalr' 'qmake' 'rcc' 'uic' 'lconvert' 'lrelease' 'lupdate' 'qmlcachegen'; do \
     ln -sv "$(which $i)" '/opt/osxcross/target/macports/pkgs/opt/local/bin/'; done
 
 # Install osxcross-extras
