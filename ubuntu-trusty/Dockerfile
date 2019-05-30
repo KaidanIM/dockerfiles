@@ -100,12 +100,13 @@ RUN wget http://security.ubuntu.com/ubuntu/pool/main/d/dbus/libdbus-1-3_1.10.6-1
 RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | sudo tar xz -C /usr --strip-components=1
 
 # Install kdesrc-build dependencies
-RUN apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf -y
+RUN apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev -y
 
 # Install KF5
-RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild
 COPY kdesrc-buildrc /root/.kdesrc-buildrc
-RUN kdesrc-build --include-dependencies kirigami knotifications --verbose && rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
+RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild && \
+    kdesrc-build --include-dependencies kirigami knotifications --verbose && \
+    rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
 
 # Build latest QXmpp
 RUN sudo apt install -y \
