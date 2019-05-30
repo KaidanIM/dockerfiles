@@ -5,6 +5,7 @@ RUN apt update && \
         cmake \
         ninja-build \
         kirigami2-dev \
+        libkf5notifications-dev \
         build-essential \
         extra-cmake-modules \
         qtbase5-dev \

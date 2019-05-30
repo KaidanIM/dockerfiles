@@ -15,6 +15,7 @@ RUN pacman -Syu --noconfirm && \
         qt5-tools \
         qt5-svg \
         kirigami2 \
+        knotifications \
         libidn \
         gloox
 

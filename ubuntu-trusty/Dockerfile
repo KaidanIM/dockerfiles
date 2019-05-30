@@ -105,7 +105,7 @@ RUN apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf -y
 # Install KF5
 RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild
 COPY kdesrc-buildrc /root/.kdesrc-buildrc
-RUN kdesrc-build --include-dependencies kirigami --verbose && rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
+RUN kdesrc-build --include-dependencies kirigami knotifications --verbose && rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
 
 # Build latest QXmpp
 RUN sudo apt install -y \
