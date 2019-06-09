@@ -23,7 +23,8 @@ RUN sudo apt update \
         libqxmpp-dev \
         clazy \
         clang \
-        qtdeclarative5-dev-tools
+        qtdeclarative5-dev-tools \
+        qtmultimedia5-dev
 
 # Build latest QXmpp
 RUN sudo apt install -y \
@@ -43,3 +44,11 @@ RUN sudo apt install -y \
  && sudo ninja install \
  && cd ../ \
  && sudo rm -rf qxmpp
+
+# Build latest ZXing-cpp
+RUN git clone https://github.com/nu-book/zxing-cpp \
+ && cd zxing-cpp \
+ && cmake . -GNinja \
+ && sudo ninja install \
+ && cd ../ \
+ && sudo rm -rf zxing-cpp
