@@ -4,7 +4,7 @@ FROM debian:buster
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yy \
         automake curl file git libtool pkg-config \
-        python3 texinfo vim  wget cmake clang
+        python3 texinfo vim  wget cmake clang zlib1g-dev
 
 ADD 0001-tools-osxcross-macports-Avoid-universal-packages.patch /tmp/
 
