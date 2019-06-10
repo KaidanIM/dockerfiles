@@ -26,3 +26,11 @@ RUN git clone https://github.com/qxmpp-project/qxmpp \
  && ninja install \
  && cd ../ \
  && rm -rf qxmpp
+
+# Build latest ZXing-cpp
+RUN git clone https://github.com/nu-book/zxing-cpp \
+ && cd zxing-cpp \
+ && cmake . -GNinja \
+ && sudo ninja install \
+ && cd ../ \
+ && sudo rm -rf zxing-cpp
