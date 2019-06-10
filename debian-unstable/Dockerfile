@@ -45,6 +45,6 @@ RUN apt install -y \
 RUN git clone https://github.com/nu-book/zxing-cpp \
  && cd zxing-cpp \
  && cmake . -GNinja \
- && sudo ninja install \
+ && ninja install \
  && cd ../ \
- && sudo rm -rf zxing-cpp
+ && rm -rf zxing-cpp
