@@ -20,7 +20,8 @@ RUN apt update && \
         libgl1-mesa-dev \
         libssl-dev \
         appstream \
-        libqxmpp-dev
+        libqxmpp-dev \
+        qtmultimedia5-dev
 
 # Build latest QXmpp
 RUN apt install -y \
