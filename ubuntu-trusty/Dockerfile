@@ -37,6 +37,7 @@ RUN apt update && apt full-upgrade -y && apt install -y --no-install-recommends 
     libfontconfig1 \
     libdbus-1-3 \
     gcc-8 g++-8 \
+    libasound2 \
     libgstreamer-plugins-base1.0-0 \
     && apt-get -qq clean \
     && rm -rf /var/lib/apt/lists/*
