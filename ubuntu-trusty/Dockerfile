@@ -36,6 +36,7 @@ RUN apt update && apt full-upgrade -y && apt install -y --no-install-recommends 
     libxrender1 \
     libfontconfig1 \
     libdbus-1-3 \
+    gcc-8 g++-8 \
     && apt-get -qq clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -128,7 +129,7 @@ RUN sudo apt install -y \
 # Build latest ZXing-cpp
 RUN git clone https://github.com/nu-book/zxing-cpp \
  && cd zxing-cpp \
- && cmake . -GNinja \
+ && cmake -DCMAKE_CXX_COMPILER=g++-8 -DCMAKE_C_COMPILER=gcc-8 . -GNinja \
  && sudo ninja install \
  && cd ../ \
  && sudo rm -rf zxing-cpp
