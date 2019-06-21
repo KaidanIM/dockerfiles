@@ -52,5 +52,9 @@ RUN git clone https://github.com/liushuyu/osxcross-extras && cd osxcross-extras 
 # Install kaidan dependencies
 RUN apt-get install extra-cmake-modules inkscape optipng icnsutils -y
 
+# Update ECM
+RUN git clone https://anongit.kde.org/extra-cmake-modules && cd extra-cmake-modules && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr . && make install
+
 # Clean up
 RUN rm /tmp/* -r
