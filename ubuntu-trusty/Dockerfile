@@ -37,7 +37,6 @@ RUN apt update && apt full-upgrade -y && apt install -y --no-install-recommends 
     libfontconfig1 \
     libdbus-1-3 \
     gcc-8 g++-8 \
-    libasound2 \
     libgstreamer-plugins-base1.0-0 \
     && apt-get -qq clean \
     && rm -rf /var/lib/apt/lists/*
@@ -89,7 +88,7 @@ ENV PATH=$KF5_DIR/bin:/var/opt/kdesrcbuild:$PATH
 ENV QT_LINUX=$QT_DESKTOP
 
 # Update dbus
-RUN wget http://security.ubuntu.com/ubuntu/pool/main/d/dbus/libdbus-1-3_1.10.6-1ubuntu3.1_amd64.deb \
+RUN wget http://security.ubuntu.com/ubuntu/pool/main/d/dbus/libdbus-1-3_1.10.6-1ubuntu3.4_amd64.deb \
     http://de.archive.ubuntu.com/ubuntu/pool/main/s/systemd/libsystemd0_229-4ubuntu21.21_amd64.deb \
     http://de.archive.ubuntu.com/ubuntu/pool/main/libg/libgcrypt20/libgcrypt20_1.6.5-2ubuntu0.5_amd64.deb \
     http://de.archive.ubuntu.com/ubuntu/pool/main/libg/libgpg-error/libgpg-error0_1.21-2ubuntu1_amd64.deb \
@@ -121,6 +120,7 @@ RUN sudo apt install -y \
         libspeex-dev \
         libtheora-dev \
         libvpx-dev \
+        libasound2 \
  && git clone https://github.com/qxmpp-project/qxmpp \
  && cd qxmpp \
  && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
