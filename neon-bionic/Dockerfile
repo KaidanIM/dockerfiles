@@ -24,6 +24,8 @@ RUN sudo apt update \
         clazy \
         clang \
         qtdeclarative5-dev-tools \
+        qtpositioning5-dev \
+        qtlocation5-dev \
         qtmultimedia5-dev
 
 # Build latest QXmpp

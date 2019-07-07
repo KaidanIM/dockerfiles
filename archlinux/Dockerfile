@@ -14,6 +14,7 @@ RUN pacman -Syu --noconfirm && \
         qt5-quickcontrols2 \
         qt5-tools \
         qt5-svg \
+        qt5-location \
         kirigami2 \
         knotifications \
         libidn \

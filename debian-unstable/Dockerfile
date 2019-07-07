@@ -21,6 +21,8 @@ RUN apt update && \
         libssl-dev \
         appstream \
         libqxmpp-dev \
+        qtpositioning5-dev \
+        qtlocation5-dev \
         qtmultimedia5-dev
 
 # Build latest QXmpp
