@@ -1,0 +1,12 @@
+=== modified file 'CMakeLists.txt'
+--- CMakeLists.txt      2015-03-05 14:54:45 +0000
++++ CMakeLists.txt      2019-07-11 21:06:19 +0000
+@@ -1,5 +1,5 @@
++cmake_minimum_required(VERSION 3.3)
+ project(dbusmenu-qt)
+-cmake_minimum_required(VERSION 2.8.11)
+ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
+ 
+ # Build options
+
+

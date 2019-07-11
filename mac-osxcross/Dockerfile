@@ -17,9 +17,10 @@ RUN mkdir /opt/osxcross && \
     wget -O tarballs/MacOSX10.11.sdk.tar.xz https://dl.dropboxusercontent.com/s/x5qzef4txpxi6ie/MacOSX10.11.sdk.tar.xz && \
     UNATTENDED=1 PORTABLE=true ./build.sh
 
-ENV PATH $PATH:/opt/osxcross/target/bin
+ENV PATH $PATH:/opt/osxcross/target/bin:/var/opt/kdesrcbuild
 ENV MACOSX_DEPLOYMENT_TARGET=10.11
 ENV export OSXCROSS_MP_INC=1
+ENV OSXCROSS_HOST=x86_64-apple-darwin15
 
 RUN apt-get install -y make ccache qt5-default qttools5-dev-tools p7zip-full python3-requests qtdeclarative5-dev-tools
 
@@ -33,7 +34,8 @@ RUN mkdir -p /opt/osxcross/target/macports/pkgs/opt/local/ && cd /tmp/ && \
 RUN echo 4 | osxcross-macports install openssl zlib mysql57-connector-cpp && \
     mkdir -p /usr/local/mysql/lib/ && ln /opt/osxcross/target/macports/pkgs/opt/local/lib/mysql57/mysql/libmysqlclient.20.dylib /usr/local/mysql/lib/libmysqlclient.20.dylib && \
     mkdir -p /opt/local/lib/ && ln /opt/osxcross/target/macports/pkgs/opt/local/lib/libz.1.dylib /opt/local/lib/libz.1.dylib && \
-    ln /opt/osxcross/target/macports/pkgs/opt/local/lib/libz.1.2.11.dylib /opt/local/lib/libz.1.2.11.dylib
+    ln /opt/osxcross/target/macports/pkgs/opt/local/lib/libz.1.2.11.dylib /opt/local/lib/libz.1.2.11.dylib && \
+    rm /opt/osxcross/target/macports/{cache,tmp} -rf
 
 RUN sed -i "s,$(grep _GL_INCDIRS /opt/osxcross/target/macports/pkgs/opt/local/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake | head -n 1),set(_GL_INCDIRS /opt/osxcross/target/SDK/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/),g" /opt/osxcross/target/macports/pkgs/opt/local/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake
 RUN sed -i "s,$(grep CMAKE_FIND_ROOT_PATH_MODE_PACKAGE /opt/osxcross/target/toolchain.cmake | head -n 1),set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH),g" /opt/osxcross/target/toolchain.cmake
@@ -49,12 +51,19 @@ RUN rm -rf '/opt/osxcross/target/macports/pkgs/opt/local/bin/'* && \
 RUN git clone https://github.com/liushuyu/osxcross-extras && cd osxcross-extras && \
     ./install_extras.sh
 
-# Install kaidan dependencies
-RUN apt-get install extra-cmake-modules inkscape optipng icnsutils -y
+# Install kaidan & kdesrc-build dependencies
+RUN apt-get install --no-install-recommends extra-cmake-modules inkscape optipng icnsutils libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev doxygen -y
 
-# Update ECM
-RUN git clone https://anongit.kde.org/extra-cmake-modules && cd extra-cmake-modules && \
-    cmake -DCMAKE_INSTALL_PREFIX=/usr . && make install
+# Install KF5
+COPY kdesrc-buildrc /root/.kdesrc-buildrc
+RUN $(/opt/osxcross/target/bin/x86_64-apple-darwin15-osxcross-conf) && \
+    git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild && \
+    /var/opt/kdesrcbuild/kdesrc-build --include-dependencies \
+        extra-cmake-modules \
+        kirigami \
+        zxing-cpp \
+        qxmpp && \
+    rm -rf ~/kde-src/
 
 # Clean up
 RUN rm /tmp/* -r

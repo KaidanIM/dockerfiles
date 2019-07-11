@@ -1,0 +1,48 @@
+global
+    # Paths
+
+    kdedir /opt/osxcross/target/macports/pkgs/opt/local/ # Where to install KF5-based software
+    qtdir /opt/osxcross/target/macports/pkgs/opt/local/ # Where to find Qt5
+
+    source-dir ~/kde/src   # Where sources are downloaded
+    build-dir  ~/kde/build # Where the source build is run
+
+    ignore-kde-structure true # Use flat structure
+
+    # Will pull in KDE-based dependencies only, to save you the trouble of
+    # listing them all below
+    include-dependencies true
+
+    cmake-options -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=/opt/osxcross/target/toolchain.cmake -DOSXCROSS_TARGET=x86_64-apple-darwin15 -DOSXCROSS_SDK=/opt/osxcross/target/SDK/MacOSX10.11.sdk/
+    make-options  -j2
+end global
+
+# Qt-using middleware libraries
+include /var/opt/kdesrcbuild/custom-qt5-libs-build-include
+
+# KF5 and Plasma :)
+include /var/opt/kdesrcbuild/kf5-qt5-build-include
+
+# Kaidan
+module zxing-cpp
+    repository https://github.com/nu-book/zxing-cpp
+    branch master
+
+    cmake-options -DLINK_CPP_STATICALLY=OFF -DBUILD_SHARED_LIBRARY=ON
+end module
+
+module qxmpp
+    repository git://github.com/qxmpp-project/qxmpp.git
+    branch master
+
+    cmake-options -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF
+end module
+
+module-set phonon
+    repository kde-projects
+    cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DPHONON_NO_DBUS=ON
+    # We avoid using just "phonon" as kdesrc-build will include all submodules
+    # that have phonon as part of their path. (i.e. it means phonon/*), but we
+    # don't want all the phonon backends.
+    use-modules phonon/phonon phonon-vlc phonon-gstreamer
+end module-set
