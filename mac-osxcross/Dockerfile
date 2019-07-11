@@ -63,7 +63,7 @@ RUN $(/opt/osxcross/target/bin/x86_64-apple-darwin15-osxcross-conf) && \
         kirigami \
         zxing-cpp \
         qxmpp && \
-    rm -rf ~/kde-src/
+    rm -rf ~/kde/
 
 # Clean up
 RUN rm /tmp/* -r
