@@ -1,0 +1,39 @@
+global
+    # Paths
+
+    kdedir /usr/lib/mxe/usr/x86_64-w64-mingw32.static/qt5 # Where to install KF5-based software
+    qtdir /usr/lib/mxe/usr/x86_64-w64-mingw32.static/qt5 # Where to find Qt5
+
+    source-dir ~/kde/src   # Where sources are downloaded
+    build-dir  ~/kde/build # Where the source build is run
+
+    ignore-kde-structure true # Use flat structure
+
+    # Will pull in KDE-based dependencies only, to save you the trouble of
+    # listing them all below
+    include-dependencies true
+
+    cmake-options -DCMAKE_BUILD_TYPE=RelWithDebugInfo -DCMAKE_TOOLCHAIN_FILE="/usr/lib/mxe/usr/x86_64-w64-mingw32.static/share/cmake/mxe-conf.cmake" -C"/usr/lib/mxe/usr/share/cmake/modules/TryRunResults.cmake" -DSTATIC_LIBRARY=1
+    make-options  -j2
+end global
+
+# Qt-using middleware libraries
+include /var/opt/kdesrcbuild/custom-qt5-libs-build-include
+
+# KF5 and Plasma :)
+include /var/opt/kdesrcbuild/kf5-qt5-build-include
+
+# Kaidan
+module zxing-cpp
+    repository https://github.com/nu-book/zxing-cpp
+    branch master
+
+    cmake-options -DLINK_CPP_STATICALLY=OM -DBUILD_SHARED_LIBRARY=OFF
+end module
+
+module qxmpp
+    repository git://github.com/qxmpp-project/qxmpp.git
+    branch master
+
+    cmake-options -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF
+end module

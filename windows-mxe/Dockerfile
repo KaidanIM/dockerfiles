@@ -13,6 +13,17 @@ RUN git clone https://anongit.kde.org/extra-cmake-modules && cd extra-cmake-modu
 # Workaround for broken symlinks
 RUN rm /usr/lib/mxe/usr/x86_64-pc-linux-gnu/bin/x86_64-w64* && for tool in /usr/lib/mxe/usr/bin/*; do ln -s $tool /usr/lib/mxe/usr/x86_64-pc-linux-gnu/bin/; done
 
+# Install kaidan & kdesrc-build dependencies
+RUN apt-get install --no-install-recommends extra-cmake-modules inkscape optipng icnsutils libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev doxygen -y
+
+# Install KF5
+COPY kdesrc-buildrc /root/.kdesrc-buildrc
+RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild && \
+    /var/opt/kdesrcbuild/kdesrc-build --include-dependencies \
+        extra-cmake-modules \
+        qxmpp \
+        zxing-cpp && \
+    rm -rf ~/kde/ # /var/opt/kdesrcbuild/
 
 ENV MXE_ROOT=/usr/lib/mxe/
 ENV MXE_TARGET=x86_64-w64-mingw32.static
