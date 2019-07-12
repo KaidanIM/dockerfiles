@@ -17,10 +17,22 @@ RUN mkdir /opt/osxcross && \
     wget -O tarballs/MacOSX10.11.sdk.tar.xz https://dl.dropboxusercontent.com/s/x5qzef4txpxi6ie/MacOSX10.11.sdk.tar.xz && \
     UNATTENDED=1 PORTABLE=true ./build.sh
 
-ENV PATH $PATH:/opt/osxcross/target/bin:/var/opt/kdesrcbuild
-ENV MACOSX_DEPLOYMENT_TARGET=10.11
-ENV export OSXCROSS_MP_INC=1
-ENV OSXCROSS_HOST=x86_64-apple-darwin15
+ENV PATH=$PATH:/opt/osxcross/target/bin:/var/opt/kdesrcbuild \
+    MACOSX_DEPLOYMENT_TARGET=10.11 \
+    OSXCROSS_MP_INC=1 \
+    OSXCROSS_HOST=x86_64-apple-darwin15 \
+    OSXCROSS_VERSION=1.0 \
+    OSXCROSS_OSX_VERSION_MIN=10.5 \
+    OSXCROSS_TARGET=darwin15 \
+    OSXCROSS_SDK_VERSION=10.11 \
+    OSXCROSS_SDK=/opt/osxcross/target/bin/../SDK/MacOSX10.11.sdk \
+    OSXCROSS_TARBALL_DIR=/opt/osxcross/target/bin/../../tarballs \
+    OSXCROSS_PATCH_DIR=/opt/osxcross/target/bin/../../patches \
+    OSXCROSS_TARGET_DIR=/opt/osxcross/target/bin/.. \
+    OSXCROSS_BUILD_DIR=/opt/osxcross/build \
+    OSXCROSS_CCTOOLS_PATH=/opt/osxcross/target/bin \
+    OSXCROSS_LIBLTO_PATH=/usr/lib/llvm-7/lib \
+    OSXCROSS_LINKER_VERSION=409.12
 
 RUN apt-get install -y make ccache qt5-default qttools5-dev-tools p7zip-full python3-requests qtdeclarative5-dev-tools
 
