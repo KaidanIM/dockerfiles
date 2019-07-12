@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:testing-slim
 
 # Install build tools
 RUN apt-get update && \
