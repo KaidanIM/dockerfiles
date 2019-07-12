@@ -23,8 +23,8 @@ RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild && \
         extra-cmake-modules \
         qxmpp \
         zxing-cpp && \
-    rm -rf ~/kde/ # /var/opt/kdesrcbuild/
+    rm -rf ~/kde/
 
 ENV MXE_ROOT=/usr/lib/mxe/
 ENV MXE_TARGET=x86_64-w64-mingw32.static
-ENV PATH=$MXE_ROOT/usr/$MXE_TARGET/bin:$PATH
+ENV PATH=$MXE_ROOT/usr/$MXE_TARGET/bin:/var/opt/kdesrcbuild:$PATH
