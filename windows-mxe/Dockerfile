@@ -4,7 +4,7 @@ FROM debian:testing-slim
 RUN apt update && apt install ca-certificates software-properties-common gpg -y && \
     echo "deb https://dl.mumble.info/mirror/mirror.mxe.cc/repos/apt stretch main" >> /etc/apt/sources.list && \
     apt-key adv  --keyserver keyserver.ubuntu.com --recv C6BF758A33A3A276 && apt update && \
-    apt install mxe-x86-64-w64-mingw32.static-qtbase mxe-x86-64-w64-mingw32.static-qtdeclarative mxe-x86-64-w64-mingw32.static-qtquickcontrols2 mxe-x86-64-w64-mingw32.static-quazip mxe-x86-64-w64-mingw32.static-poppler mxe-x86-64-w64-mingw32.static-qtscript mxe-x86-64-w64-mingw32.static-qtsvg extra-cmake-modules mxe-x86-64-w64-mingw32.static-qtgraphicaleffects inkscape optipng mxe-x86-64-w64-mingw32.static-qttools icoutils mxe-x86-64-w64-mingw32.static-gcc mxe-x86-64-w64-mingw32.static-qtmultimedia -y
+    apt install mxe-x86-64-w64-mingw32.static-qtbase mxe-x86-64-w64-mingw32.static-qtdeclarative mxe-x86-64-w64-mingw32.static-qtquickcontrols2 mxe-x86-64-w64-mingw32.static-quazip mxe-x86-64-w64-mingw32.static-poppler mxe-x86-64-w64-mingw32.static-qtscript mxe-x86-64-w64-mingw32.static-qtsvg extra-cmake-modules mxe-x86-64-w64-mingw32.static-qtgraphicaleffects inkscape optipng mxe-x86-64-w64-mingw32.static-qttools icoutils mxe-x86-64-w64-mingw32.static-gcc mxe-x86-64-w64-mingw32.static-qtmultimedia mxe-x86-64-w64-mingw32.static-qtlocation -y
 
 # Update ECM
 RUN git clone https://anongit.kde.org/extra-cmake-modules && cd extra-cmake-modules && \
