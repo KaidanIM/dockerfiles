@@ -1,5 +1,7 @@
 #!/usr/bin/env bash -e
 
+IMAGE=${IMAGE:-$2}
+
 build() {
 	if [ -f $IMAGE/Dockerfile ]; then
 		cd $IMAGE
