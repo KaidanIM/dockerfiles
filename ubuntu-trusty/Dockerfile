@@ -103,35 +103,10 @@ RUN wget http://security.ubuntu.com/ubuntu/pool/main/d/dbus/libdbus-1-3_1.10.6-1
 RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | sudo tar xz -C /usr --strip-components=1
 
 # Install kdesrc-build dependencies
-RUN apt install libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev doxygen -y
+RUN apt install -y libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev libxcb-icccm4-dev doxygen git libopus-dev libspeex-dev libtheora-dev libvpx-dev libasound2 libxcb-res0-dev
 
 # Install KF5
 COPY kdesrc-buildrc /root/.kdesrc-buildrc
 RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild && \
-    kdesrc-build --include-dependencies kirigami knotifications --verbose && \
-    rm -rf ~/kde-src/ /var/opt/kdesrcbuild/
-
-# Build latest QXmpp
-RUN sudo apt install -y \
-        git \
-        debhelper \
-        graphviz \
-        libopus-dev \
-        libspeex-dev \
-        libtheora-dev \
-        libvpx-dev \
-        libasound2 \
- && git clone https://github.com/qxmpp-project/qxmpp \
- && cd qxmpp \
- && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
- && sudo ninja install \
- && cd ../ \
- && sudo rm -rf qxmpp
-
-# Build latest ZXing-cpp
-RUN git clone https://github.com/nu-book/zxing-cpp \
- && cd zxing-cpp \
- && cmake -DCMAKE_CXX_COMPILER=g++-8 -DCMAKE_C_COMPILER=gcc-8 . -GNinja \
- && sudo ninja install \
- && cd ../ \
- && sudo rm -rf zxing-cpp
+    kdesrc-build --include-dependencies kirigami knotifications zxing-cpp qxmpp --verbose || cat ~/kde-src/log/*/*/error.log && \
+    rm -rf ~/kde-src/

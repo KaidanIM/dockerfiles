@@ -35,3 +35,18 @@ include /var/opt/kdesrcbuild/kf5-qt5-build-include
 # It is possible to change the options for modules loaded from the file
 # included above (since it's not possible to add a module that's already been
 # included), e.g.
+
+# Kaidan
+module zxing-cpp
+    repository https://github.com/nu-book/zxing-cpp
+    branch master
+
+    cmake-options -DLINK_CPP_STATICALLY=OFF -DBUILD_SHARED_LIBRARY=ON -DCMAKE_CXX_COMPILER=g++-8 -DCMAKE_C_COMPILER=gcc-8
+end module
+
+module qxmpp
+    repository git://github.com/qxmpp-project/qxmpp.git
+    branch master
+
+    cmake-options -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF
+end module
