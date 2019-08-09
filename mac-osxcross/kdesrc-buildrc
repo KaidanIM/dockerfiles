@@ -26,7 +26,7 @@ include /var/opt/kdesrcbuild/kf5-qt5-build-include
 # Kaidan
 module zxing-cpp
     repository https://github.com/nu-book/zxing-cpp
-    tag v1.0.6
+    branch master
 
     cmake-options -DLINK_CPP_STATICALLY=OFF -DBUILD_SHARED_LIBRARY=ON
 end module
