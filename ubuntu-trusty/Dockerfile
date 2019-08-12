@@ -108,5 +108,5 @@ RUN apt install -y libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrend
 # Install KF5
 COPY kdesrc-buildrc /root/.kdesrc-buildrc
 RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild && \
-    kdesrc-build --include-dependencies kirigami knotifications zxing-cpp qxmpp --verbose || cat ~/kde-src/log/*/*/error.log && \
+    kdesrc-build --include-dependencies kirigami knotifications zxing-cpp qxmpp --verbose && \
     rm -rf ~/kde-src/
