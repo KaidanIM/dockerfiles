@@ -13,7 +13,6 @@ deploy:
 matrix:
   include:
     - env: IMAGE=archlinux
-    - env: IMAGE=android
     - env: IMAGE=debian-unstable
     - env: IMAGE=ubuntu-trusty
     - env: IMAGE=ubuntu-xenial
