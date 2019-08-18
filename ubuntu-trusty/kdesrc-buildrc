@@ -15,7 +15,7 @@ global
     source-dir ~/kde-src
 
     make-options -j4
-    cmake-options -DCMAKE_BUILD_TYPE=Release
+    cmake-options -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++-8 -DCMAKE_C_COMPILER=gcc-8
 end global
 
 # Instead of specifying modules here, the current best practice is to refer to
@@ -41,7 +41,7 @@ module zxing-cpp
     repository https://github.com/nu-book/zxing-cpp
     branch master
 
-    cmake-options -DLINK_CPP_STATICALLY=OFF -DBUILD_SHARED_LIBRARY=ON -DCMAKE_CXX_COMPILER=g++-8 -DCMAKE_C_COMPILER=gcc-8
+    cmake-options -DLINK_CPP_STATICALLY=OFF -DBUILD_SHARED_LIBRARY=ON
 end module
 
 module qxmpp
