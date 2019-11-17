@@ -8,11 +8,14 @@ global
     branch-group kf5-qt5
     kdedir /opt/kf5 # Where to install KF5-based software
     # Uncomment this and edit value to choose a different Qt5
-#    qtdir /usr     # Where to find Qt5
+    # qtdir /usr     # Where to find Qt5
 
     # Where to download source code. By default the build directory and
     # logs will be kept under this directory as well.
     source-dir ~/kde-src
+
+    make-options -j4
+    cmake-options -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++-8 -DCMAKE_C_COMPILER=gcc-8
 end global
 
 # Instead of specifying modules here, the current best practice is to refer to
@@ -32,6 +35,18 @@ include /var/opt/kdesrcbuild/kf5-qt5-build-include
 # It is possible to change the options for modules loaded from the file
 # included above (since it's not possible to add a module that's already been
 # included), e.g.
-options kcoreaddons
-    make-options -j4
-end options
+
+# Kaidan
+module zxing-cpp
+    repository https://github.com/nu-book/zxing-cpp
+    branch master
+
+    cmake-options -DLINK_CPP_STATICALLY=OFF -DBUILD_SHARED_LIBRARY=ON
+end module
+
+module qxmpp
+    repository git://github.com/qxmpp-project/qxmpp.git
+    branch master
+
+    cmake-options -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF
+end module
