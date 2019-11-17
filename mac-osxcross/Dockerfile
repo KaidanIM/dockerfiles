@@ -39,7 +39,7 @@ RUN apt-get install -y make ccache qt5-default qttools5-dev-tools p7zip-full pyt
 # Install Qt
 RUN mkdir -p /opt/osxcross/target/macports/pkgs/opt/local/ && cd /tmp/ && \
     wget -q https://git.sr.ht/~lnj/qli-installer/blob/master/qli-installer.py && \
-    python3 ./qli-installer.py 5.13.0 mac desktop && \
+    python3 ./qli-installer.py 5.13.2 mac desktop && \
     mv /tmp/*/clang_64/* /opt/osxcross/target/macports/pkgs/opt/local/
 
 # Install Qt dependencies
