@@ -6,7 +6,7 @@ RUN apt update && \
     add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
 # Install Qt
-ARG QT_VERSION=5.12.5
+ARG QT_VERSION=5.12.6
 
 ENV DEBIAN_FRONTEND=noninteractive \
     QT_PATH=/opt/Qt
