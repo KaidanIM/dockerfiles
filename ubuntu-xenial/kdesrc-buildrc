@@ -50,3 +50,28 @@ module qxmpp
 
     cmake-options -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF
 end module
+
+module gstreamer
+    repository https://gitlab.freedesktop.org/gstreamer/gstreamer
+    branch 1.16
+    override-build-system meson
+end module
+
+module gstreamer-plugins-base
+    repository https://gitlab.freedesktop.org/gstreamer/gst-plugins-base
+    branch 1.16
+    override-build-system meson
+end module
+
+module gstreamer-plugins-good
+    repository https://gitlab.freedesktop.org/gstreamer/gst-plugins-good
+    branch 1.16
+    override-build-system meson
+end module
+
+# Build this module last
+module zgstreamer-plugins-bad
+    repository https://gitlab.freedesktop.org/gstreamer/gst-plugins-bad
+    branch 1.16
+    override-build-system meson
+end module

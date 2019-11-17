@@ -80,20 +80,31 @@ RUN apt-get update && \
 &&  apt-get clean
 
 ENV KF5_DIR=/opt/kf5
-ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH
-ENV PKG_CONFIG_PATH=$KF5_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
+ENV LD_LIBRARY_PATH=$KF5_DIR/lib/x86_64-linux-gnu:$KF5_DIR/lib:$LD_LIBRARY_PATH:$QT_DESKTOP/lib/
+ENV PKG_CONFIG_PATH=$KF5_DIR/lib/pkgconfig:$KF5_DIR/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 ENV PATH=$KF5_DIR/bin:/var/opt/kdesrcbuild:$PATH
-
 ENV QT_LINUX=$QT_DESKTOP
+
+ENV CC=gcc-8 CXX=g++-8 CXXFLAGS=-std=gnu++11
 
 # Update CMAKE
 RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | tar xz -C /usr --strip-components=1
 
 # Install kdesrc-build dependencies
-RUN apt install -y libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev libxcb-icccm4-dev doxygen git libopus-dev libspeex-dev libtheora-dev libvpx-dev libasound2 libxcb-res0-dev
+RUN apt install -y libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev libxcb-icccm4-dev doxygen git libopus-dev libspeex-dev libtheora-dev libvpx-dev libasound2 libxcb-res0-dev python3-setuptools libglib2.0-dev flex bison && \
+    git clone https://github.com/mesonbuild/meson && cd meson && python3 setup.py install
 
 # Install KF5
 COPY kdesrc-buildrc /root/.kdesrc-buildrc
 RUN git clone git://anongit.kde.org/kdesrc-build /var/opt/kdesrcbuild && \
-    kdesrc-build --include-dependencies kirigami knotifications zxing-cpp qxmpp --verbose && \
+    kdesrc-build --include-dependencies \
+        kirigami \
+        knotifications \
+        zxing-cpp \
+        qxmpp \
+        gstreamer \
+        gstreamer-plugins-base \
+        gstreamer-plugins-good \
+        zgstreamer-plugins-bad \
+    --verbose && \
     rm -rf ~/kde-src/
