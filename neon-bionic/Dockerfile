@@ -21,6 +21,7 @@ RUN sudo apt update \
         libssl-dev \
         appstream \
         libqxmpp-dev \
+        libllvm8 \
         clazy \
         clang \
         qtdeclarative5-dev-tools \
