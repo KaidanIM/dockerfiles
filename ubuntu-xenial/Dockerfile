@@ -92,7 +92,7 @@ RUN wget https://cmake.org/files/v3.13/cmake-3.13.3-Linux-x86_64.tar.gz -O- | ta
 
 # Install kdesrc-build dependencies
 RUN apt install -y libio-socket-ssl-perl libyaml-libyaml-perl gperf bzr libxrender-dev libxcb-keysyms1-dev libxcb-icccm4-dev doxygen git libopus-dev libspeex-dev libtheora-dev libvpx-dev libasound2 libxcb-res0-dev python3-setuptools libglib2.0-dev flex bison && \
-    git clone https://github.com/mesonbuild/meson && cd meson && python3 setup.py install
+    git clone https://github.com/mesonbuild/meson -b 0.52.1 && cd meson && python3 setup.py install
 
 # Install KF5
 COPY kdesrc-buildrc /root/.kdesrc-buildrc
