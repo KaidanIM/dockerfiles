@@ -23,7 +23,8 @@ RUN apt update && \
         libqxmpp-dev \
         qtpositioning5-dev \
         qtlocation5-dev \
-        qtmultimedia5-dev
+        qtmultimedia5-dev \
+        clazy
 
 # Build latest QXmpp
 RUN apt install -y \
