@@ -1,4 +1,4 @@
-FROM debian:unstable
+FROM debian:testing
 
 RUN apt update && \
     apt install -y \
@@ -24,7 +24,8 @@ RUN apt update && \
         qtpositioning5-dev \
         qtlocation5-dev \
         qtmultimedia5-dev \
-        clazy
+        clazy \
+        libgstreamer1.0-dev
 
 # Build latest QXmpp
 RUN apt install -y \
@@ -40,7 +41,7 @@ RUN apt install -y \
         qtbase5-dev \
  && git clone https://github.com/qxmpp-project/qxmpp \
  && cd qxmpp \
- && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 -DWITH_GSTREAMER=ON \
  && ninja install \
  && cd ../ \
  && rm -rf qxmpp
