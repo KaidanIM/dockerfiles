@@ -35,7 +35,7 @@ module qxmpp
     repository git://github.com/qxmpp-project/qxmpp.git
     branch master
 
-    cmake-options -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF
+    cmake-options -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF -DWITH_GSTREAMER=ON
 end module
 
 module phonon/phonon

@@ -43,10 +43,9 @@ RUN mkdir -p /opt/osxcross/target/macports/pkgs/opt/local/ && cd /tmp/ && \
     mv /tmp/*/clang_64/* /opt/osxcross/target/macports/pkgs/opt/local/
 
 # Install Qt dependencies
-RUN echo 4 | osxcross-macports install openssl zlib mysql57-connector-cpp && \
+RUN echo 4 | osxcross-macports install openssl zlib mysql57-connector-cpp gstreamer1 && \
     mkdir -p /usr/local/mysql/lib/ && ln /opt/osxcross/target/macports/pkgs/opt/local/lib/mysql57/mysql/libmysqlclient.20.dylib /usr/local/mysql/lib/libmysqlclient.20.dylib && \
-    mkdir -p /opt/local/lib/ && ln /opt/osxcross/target/macports/pkgs/opt/local/lib/libz.1.dylib /opt/local/lib/libz.1.dylib && \
-    ln /opt/osxcross/target/macports/pkgs/opt/local/lib/libz.1.2.11.dylib /opt/local/lib/libz.1.2.11.dylib && \
+    mkdir -p /opt/local/lib/ && ln /opt/osxcross/target/macports/pkgs/opt/local/lib/*.dylib /opt/local/lib/ && \
     rm /opt/osxcross/target/macports/{cache,tmp} -rf
 
 RUN sed -i "s,$(grep _GL_INCDIRS /opt/osxcross/target/macports/pkgs/opt/local/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake | head -n 1),set(_GL_INCDIRS /opt/osxcross/target/SDK/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/),g" /opt/osxcross/target/macports/pkgs/opt/local/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake
