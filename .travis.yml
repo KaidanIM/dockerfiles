@@ -14,7 +14,5 @@ matrix:
   include:
     - env: IMAGE=debian-unstable
     - env: IMAGE=ubuntu-xenial
-    - env: IMAGE=ubuntu-touch-xenial
-    - env: IMAGE=neon-bionic
     - env: IMAGE=windows-mxe
     - env: IMAGE=mac-osxcross
