@@ -12,7 +12,6 @@ deploy:
 
 matrix:
   include:
-    - env: IMAGE=archlinux
     - env: IMAGE=debian-unstable
     - env: IMAGE=ubuntu-xenial
     - env: IMAGE=ubuntu-touch-xenial
