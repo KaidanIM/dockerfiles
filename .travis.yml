@@ -13,6 +13,3 @@ deploy:
 matrix:
   include:
     - env: IMAGE=debian-unstable
-    - env: IMAGE=ubuntu-xenial
-    - env: IMAGE=windows-mxe
-    - env: IMAGE=mac-osxcross
