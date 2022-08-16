@@ -1,4 +1,4 @@
-FROM debian:testing
+FROM debian:bullseye
 
 RUN sudo apt update && \
     sudo apt install -y \
@@ -45,7 +45,7 @@ RUN git clone https://github.com/qxmpp-project/qxmpp \
  && rm -rf qxmpp
 
 # Build latest ZXing-cpp
-RUN git clone https://github.com/nu-book/zxing-cpp \
+RUN git clone https://github.com/nu-book/zxing-cpp -t v1.4.0 \
  && cd zxing-cpp \
  && cmake . -GNinja \
  && ninja install \
