@@ -2,6 +2,7 @@ FROM debian:testing
 
 RUN apt update && \
     apt install -y \
+        git \
         cmake \
         ninja-build \
         kirigami2-dev \
@@ -11,7 +12,6 @@ RUN apt update && \
         qtbase5-dev \
         qttools5-dev \
         qtquickcontrols2-5-dev \
-        libgloox-dev \
         qtdeclarative5-dev \
         libqt5svg5-dev \
         ccache \
@@ -19,28 +19,27 @@ RUN apt update && \
         libgl1-mesa-dev \
         libssl-dev \
         appstream \
-        libqxmpp-dev \
         qtpositioning5-dev \
         qtlocation5-dev \
         qtmultimedia5-dev \
         clazy \
-        libgstreamer1.0-dev
-
-# Build latest QXmpp
-RUN apt install -y \
-        cmake \
-        git \
-        debhelper \
         doxygen \
         graphviz \
-        libopus-dev \
-        libspeex-dev \
-        libtheora-dev \
-        libvpx-dev \
-        qtbase5-dev \
- && git clone https://github.com/qxmpp-project/qxmpp \
+        libqca-qt5-2-dev \
+        libgstreamer1.0-dev
+
+# Build latest libomemo-c
+RUN git clone https://github.com/dino/libomemo-c \
+ && cd libomemo-c \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON \
+ && ninja install \
+ && cd ../ \
+ && rm -rf libomemo-c
+
+# Build latest QXmpp
+RUN git clone https://github.com/qxmpp-project/qxmpp \
  && cd qxmpp \
- && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 -DWITH_GSTREAMER=ON \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 -DWITH_GSTREAMER=ON \
  && ninja install \
  && cd ../ \
  && rm -rf qxmpp
