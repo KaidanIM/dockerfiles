@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
-RUN sudo apt update && \
-    sudo apt install -y \
+RUN apt update && \
+    apt install -y \
         git \
         cmake \
         ninja-build \
