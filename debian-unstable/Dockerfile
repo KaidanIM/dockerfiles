@@ -45,8 +45,9 @@ RUN git clone https://github.com/qxmpp-project/qxmpp \
  && rm -rf qxmpp
 
 # Build latest ZXing-cpp
-RUN git clone https://github.com/nu-book/zxing-cpp -t v1.4.0 \
+RUN git clone https://github.com/nu-book/zxing-cpp \
  && cd zxing-cpp \
+ && git checkout v1.4.0 \
  && cmake . -GNinja \
  && ninja install \
  && cd ../ \
