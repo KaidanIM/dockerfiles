@@ -39,7 +39,7 @@ RUN git clone https://github.com/dino/libomemo-c \
 # Build latest QXmpp
 RUN git clone https://github.com/qxmpp-project/qxmpp \
  && cd qxmpp \
- && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 -DWITH_GSTREAMER=ON \
+ && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_OMEMO=ON -DBUILD_TESTS=0 -DBUILD_EXAMPLES=0 -DWITH_GSTREAMER=ON \
  && ninja install \
  && cd ../ \
  && rm -rf qxmpp
