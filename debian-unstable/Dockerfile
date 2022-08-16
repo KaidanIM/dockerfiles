@@ -1,7 +1,7 @@
 FROM debian:testing
 
-RUN apt update && \
-    apt install -y \
+RUN sudo apt update && \
+    sudo apt install -y \
         git \
         cmake \
         ninja-build \
