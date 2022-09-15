@@ -7,6 +7,7 @@ RUN apt update && \
         ninja-build \
         kirigami2-dev \
         libkf5notifications-dev \
+        libkf5kio-dev \
         build-essential \
         extra-cmake-modules \
         qtbase5-dev \
@@ -26,7 +27,8 @@ RUN apt update && \
         doxygen \
         graphviz \
         libqca-qt5-2-dev \
-        libgstreamer1.0-dev
+        libgstreamer1.0-dev && \
+    apt clean
 
 # Build latest libomemo-c
 RUN git clone https://github.com/dino/libomemo-c \
