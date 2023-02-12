@@ -8,6 +8,7 @@ RUN apt update && \
         kirigami2-dev \
         libkf5notifications-dev \
         libkf5kio-dev \
+        kquickimageeditor-dev \
         build-essential \
         extra-cmake-modules \
         qtbase5-dev \
