@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:testing
 
 RUN apt update && \
     apt install -y \
