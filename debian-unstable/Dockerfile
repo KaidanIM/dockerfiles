@@ -28,7 +28,8 @@ RUN apt update && \
         doxygen \
         graphviz \
         libqca-qt5-2-dev \
-        libgstreamer1.0-dev && \
+        libgstreamer1.0-dev \
+        kirigami-addons-dev && \
     apt clean
 
 # Build latest libomemo-c
