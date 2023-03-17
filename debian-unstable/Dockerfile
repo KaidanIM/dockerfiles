@@ -29,16 +29,10 @@ RUN apt update && \
         graphviz \
         libqca-qt5-2-dev \
         libgstreamer1.0-dev \
-        kirigami-addons-dev && \
-    apt clean
-
-# Build latest libomemo-c
-RUN git clone https://github.com/dino/libomemo-c \
- && cd libomemo-c \
- && cmake . -GNinja -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON \
- && ninja install \
- && cd ../ \
- && rm -rf libomemo-c
+        kirigami-addons-dev \
+        libomemo-c-dev \
+        libzxing-dev \
+ && apt clean
 
 # Build latest QXmpp
 RUN git clone https://github.com/qxmpp-project/qxmpp \
@@ -49,11 +43,3 @@ RUN git clone https://github.com/qxmpp-project/qxmpp \
  && cd ../ \
  && rm -rf qxmpp
 
-# Build latest ZXing-cpp
-RUN git clone https://github.com/nu-book/zxing-cpp \
- && cd zxing-cpp \
- && git checkout v1.4.0 \
- && cmake . -GNinja \
- && ninja install \
- && cd ../ \
- && rm -rf zxing-cpp
