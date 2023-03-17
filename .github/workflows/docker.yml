@@ -1,0 +1,19 @@
+name: docker
+on:
+  push:
+    branches:
+      - master
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./debian-unstable/Dockerfile
+          push: true
+          outputs: type=image,name=debian
+
