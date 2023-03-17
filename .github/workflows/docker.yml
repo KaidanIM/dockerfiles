@@ -9,6 +9,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -16,4 +22,5 @@ jobs:
           file: ./debian-unstable/Dockerfile
           push: true
           outputs: type=image,name=debian
+          tags: ghcr.io/kaidanim/debian:latest
 
